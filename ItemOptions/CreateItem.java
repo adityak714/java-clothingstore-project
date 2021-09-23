@@ -15,7 +15,7 @@ String name;
 double price; 
 
 
-public CreateItem (int id, String name, double price) {
+public CreateItem (String id, String name, double price) {
     //pointing to the declared attributes in the class.
     this.id = id;
     this.name = name;
@@ -23,7 +23,7 @@ public CreateItem (int id, String name, double price) {
 
 }
 
-public int getID(){
+public String getID(){
    
     return id;
 
@@ -44,7 +44,7 @@ public double getPrice(){
 //Creating a behaivour method for creating an item.
 public static CreateItem Create() {
 
-    int id = UserInput.inputInt("Type an ID number for the new item(4 digits): ");
+    String id = UserInput.inputString("Type an ID number for the new item(4 digits): ");
     //store the input value in storeID array.
 
     String name = UserInput.inputString("Create a name for the new item: ");
