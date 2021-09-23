@@ -71,9 +71,4 @@ public static CreateItem Create() {
     
 
 
-/*int playlistSize = UserInput.readInt("How many songs?");
-Song[] playlist = new Song[playlistSize];
-    for (i = 0; i < playlistSize; i++){
-        playlist[i] = createSong();
-        playlist[i].Play(); 
-*/
+
