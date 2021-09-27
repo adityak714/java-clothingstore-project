@@ -10,9 +10,9 @@ In order to create an item, the user must input: (i) the item ID, (ii) the item 
 
 When the item is created successfully, the system should print the message: "Item <ID> was registered successfully."*/
 
-final String id;
-String name;
-double price; 
+private final String id;
+private final String name;
+private double price; 
 
 
 public CreateItem (String id, String name, double price) {
