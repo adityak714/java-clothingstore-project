@@ -1,6 +1,7 @@
 # ClothingStoreProject
 
 DIT043 Project by Aditya, Anton and Akuien
+_Group 23_
 
 To do (by Oct 1):
 Complete individual reflection form
@@ -10,9 +11,9 @@ Complete group reflection form
 1.2 = Anton
 1.3 = Akuien
 
-How to edit: 
-Create a local copy by clicking green button (Code) and copying HTTPS link onto IntelliJ. 
-                     
+**How to edit: **
+
+Create a local copy by clicking green button (Code) and copying HTTPS link onto IntelliJ.                      
                      
                      --- NOTE: Set your JDK to 11, not anything else. ---
                      
