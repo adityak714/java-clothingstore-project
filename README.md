@@ -12,6 +12,8 @@ Complete group reflection form
 
 How to edit: 
 Create a local copy by clicking green button (Code) and copying HTTPS link onto IntelliJ. 
+                     
+                     
                      --- NOTE: Set your JDK to 11, not anything else. ---
                      
 Next, instead of downloading a new file everytime to create a new local copy, after opening the downloaded file on IntelliJ, click on
