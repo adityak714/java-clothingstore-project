@@ -2,29 +2,25 @@ package ItemOptions;
 
 public class Menu {
 
+    public static final String EOL = System.lineSeparator();
+
     public static void printMenu(){
 
         int input;
 
-       
-        
-        do {  
-            
-        
-            System.out.println("\nItem options menu: "
-            + "\n0. Return to Main Menu. "
-            + "\n1. Create an Item. "
-            + "\n2. Remove an Item. "
-            + "\n3. Print all registered Items. "
-            + "\n4. Buy an Item. "
-            + "\n5. Update an item's name. "
-            + "\n6. Update an item's price. ");
+        do {
+            System.out.println(EOL + "Item options menu: "
 
-            
-            input = UserInput.inputInt("\nType an option number: ");
-    
-          
-            
+            + EOL + "0. Return to Main Menu. "
+            + EOL + "1. Create an Item. "
+            + EOL + "2. Remove an Item. "
+            + EOL + "3. Print all registered Items. "
+            + EOL + "4. Buy an Item. "
+            + EOL + "5. Update an item's name. "
+            + EOL + "6. Update an item's price. ");
+
+            input = UserInput.inputInt(EOL + "Type an option number: ");
+
             switch(input) {
                 case 0:
                    StartMenu.putInOption();
@@ -48,14 +44,9 @@ public class Menu {
                     System.out.print("UpdateItemPrice();");
                     break;
                 default:
-                    System.out.print("\n“Invalid menu option. Please type another option”");
+                    System.out.println("Invalid menu option. Please type another option" + EOL);
                     printMenu();
-                
              }
-          } while(input < 0 || input > 6);
-
-
-       
+        } while(input < 0 || input > 6);
     }
-    
 }

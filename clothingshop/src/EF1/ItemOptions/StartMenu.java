@@ -2,22 +2,22 @@ package ItemOptions;
 
 public class StartMenu {
 
+    static final String EOL = System.lineSeparator();
+
     public static void optionsList() {
-        System.out.println("Main Menu: Please choose among the options below.\n" +
-                "\n0. Close system." +
-                "\n1. Open Item options." +
-                "\n2. Open Review options." +
-                "\n3. Open Transaction History options." );
-
-
+        System.out.println(EOL + "Main Menu: Please choose among the options below." + EOL +
+                "0. Close system." + EOL +
+                "1. Open Item options." + EOL +
+                "2. Open Review options." + EOL +
+                "3. Open Transaction History options." );
     }
 
     public static void putInOption () {
             int response;
 
         do {
-           optionsList();
-            response = UserInput.inputInt("\nType an option number: ");
+            optionsList();
+            response = UserInput.inputInt(EOL + "Type an option number: ");
 
             switch (response) {
                 case 0:
@@ -33,7 +33,7 @@ public class StartMenu {
                     MenuThree.putInOption();       // For example, I am referring to the code I wrote in
                     break;                          // method MenuThree in class OnePointFour
                 default:
-                    System.out.println("Invalid menu option. Please type another menu option. \n");
+                    System.out.println("Invalid menu option. Please type another menu option." + EOL);
                     optionsList();
                     break;
             }

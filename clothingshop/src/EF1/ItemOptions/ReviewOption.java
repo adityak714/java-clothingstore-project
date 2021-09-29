@@ -5,10 +5,11 @@ public class ReviewOption {
     public static final String EOL = System.lineSeparator();
 
     public static void reviewsMenu() {
+
         int optionNumber;
 
         do {
-            optionNumber = UserInput.inputInt("Reviews options menu: " + EOL +
+            optionNumber = UserInput.inputInt(EOL + "Reviews options menu: " + EOL +
                     "0. Return to Main Menu. " + EOL +
                     "1. Create a review for an Item." + EOL +
                     "2. Print a specific review of an Item." + EOL +
@@ -19,9 +20,8 @@ public class ReviewOption {
                     "7. Print item(s) with most reviews." + EOL +
                     "8. Print item(s) with least reviews." + EOL +
                     "9. Print item(s) with best mean review grade." + EOL +
-                    "10. Print item(s) with worst mean review grade." + EOL + EOL +
-                    "Type an option number: ");
-
+                    "10. Print item(s) with worst mean review grade." + EOL
+                    + EOL + "Type an option number: ");
 
             switch (optionNumber) {
                 case 0:
@@ -60,14 +60,9 @@ public class ReviewOption {
                 default:
                     System.out.println("“Invalid menu option. Please type another option”");
                     break;
-
-
             }
         } while (optionNumber < 0 || optionNumber > 10);
-
-
     }
-
 }
 
 

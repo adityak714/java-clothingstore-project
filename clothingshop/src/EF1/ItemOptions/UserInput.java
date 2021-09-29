@@ -12,9 +12,8 @@ public class UserInput {
         int valueInt = scanner.nextInt();
         scanner.nextLine(); 
         return valueInt;
-
-        
     }
+
     public static String inputString(String message){
         //takes user input as a string.
         System.out.print(message);
@@ -22,13 +21,13 @@ public class UserInput {
         scanner.nextLine();
         return valueString;
     }
+
     public static double inputDouble(String message){
         //takes user input as a double.
         System.out.print(message);
         double valueDouble = scanner.nextDouble();
         scanner.nextLine();
         return valueDouble;
-
     }
    
 

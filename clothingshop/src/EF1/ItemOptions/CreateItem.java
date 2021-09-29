@@ -41,7 +41,7 @@ public double getPrice(){
 }
 
 
-//Creating a behaivour method for creating an item.
+//Creating a behaviour method for creating an item.
 public static CreateItem Create() {
 
     String id = UserInput.inputString("Type an ID number for the new item(4 digits): ");

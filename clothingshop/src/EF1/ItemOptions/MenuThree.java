@@ -5,7 +5,7 @@ public class MenuThree {
     public static final String EOL = System.lineSeparator();
 
     public static void optionsList() {
-        System.out.println("Transaction History options menu:" + EOL +
+        System.out.println(EOL + "Transaction History options menu:" + EOL +
                 "0. Return to Main Menu." + EOL +
                 "1. Print total profit from all item purchases." + EOL +
                 "2. Print total units sold from all item purchases." + EOL +
@@ -24,8 +24,6 @@ public class MenuThree {
         do {
             optionsList();
             response = UserInput.inputInt("Type an option number: ");
-
-
 
             switch (response) {
                 case 0:
@@ -57,10 +55,10 @@ public class MenuThree {
                     // Print item with the highest profit.
                     break;
                 default:
-                    System.out.println("Invalid menu option. Please type another menu option.");
+                    System.out.println("Invalid menu option. Please type another menu option." + EOL);
                     optionsList();
                     break;
-           }
+            }
         } while (response < 0 || response > 8);
     }
 }
