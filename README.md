@@ -4,7 +4,9 @@ DIT043 Project by Aditya, Anton and Akuien
 
 _Group 23_
 
-To do (by Oct 1):
+
+**To do (by Oct 1):**
+
 Complete individual reflection form
 Complete group reflection form 
 
