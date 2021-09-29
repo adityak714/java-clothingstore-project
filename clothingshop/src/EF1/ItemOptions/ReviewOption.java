@@ -1,16 +1,14 @@
-package DIT043PROJECT.clothingshop.src.EF1.ItemOptions;
+package ItemOptions;
 
-import java.util.Scanner;
 public class ReviewOption {
 
     public static final String EOL = System.lineSeparator();
 
-    public static void main(String[] args) {
-
+    public static void reviewsMenu() {
         int optionNumber;
-        Scanner scanner = new Scanner(System.in);
+
         do {
-            System.out.print("Reviews options menu: " + EOL +
+            optionNumber = UserInput.inputInt("Reviews options menu: " + EOL +
                     "0. Return to Main Menu. " + EOL +
                     "1. Create a review for an Item." + EOL +
                     "2. Print a specific review of an Item." + EOL +
@@ -24,13 +22,10 @@ public class ReviewOption {
                     "10. Print item(s) with worst mean review grade." + EOL + EOL +
                     "Type an option number: ");
 
-            optionNumber = scanner.nextInt();
-
-            System.out.println(EOL + " Executing option: " + optionNumber);
 
             switch (optionNumber) {
                 case 0:
-                    System.out.println("mainMenu()");
+                    StartMenu.putInOption();
                     break;
                 case 1:
                     System.out.println("CreateReview().");
@@ -66,14 +61,21 @@ public class ReviewOption {
                     System.out.println("“Invalid menu option. Please type another option”");
                     break;
 
+
             }
-        } while(optionNumber != 0);
+        } while (optionNumber < 0 || optionNumber > 10);
 
-
-scanner.close();
-
-       }
 
     }
+
+}
+
+
+
+
+
+
+
+
 
 

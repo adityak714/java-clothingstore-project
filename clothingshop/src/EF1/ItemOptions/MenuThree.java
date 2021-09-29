@@ -1,4 +1,4 @@
-package DIT043PROJECT.clothingshop.src.EF1.ItemOptions;
+package ItemOptions;
 
 public class MenuThree {
 
@@ -16,17 +16,20 @@ public class MenuThree {
                 "7. Print all transactions of a specific item." + EOL +
                 "8. Print item with highest profit." + EOL);
 
-        System.out.println("Type an option number: ");
     }
 
     public static void putInOption() {
-        do {
-            Input.askOption();
+        int response;
 
-            switch (Input.response) {
+        do {
+            optionsList();
+            response = UserInput.inputInt("Type an option number: ");
+
+
+
+            switch (response) {
                 case 0:
                     System.out.println("Returning to main menu ...");
-                    StartMenu.optionsList();
                     StartMenu.putInOption();
                     break;
                 case 1:
@@ -58,6 +61,6 @@ public class MenuThree {
                     optionsList();
                     break;
            }
-        } while (Input.response < 0 || Input.response > 8);
+        } while (response < 0 || response > 8);
     }
 }

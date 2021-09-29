@@ -27,7 +27,7 @@ public class Menu {
             
             switch(input) {
                 case 0:
-                    System.out.print("ReturnToMenu();");
+                   StartMenu.putInOption();
                     break;
                 case 1:
                     CreateItem.Create();
@@ -52,7 +52,7 @@ public class Menu {
                     printMenu();
                 
              }
-          } while(input != 0);
+          } while(input < 0 || input > 6);
 
 
        

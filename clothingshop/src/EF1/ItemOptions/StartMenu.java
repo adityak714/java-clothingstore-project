@@ -1,6 +1,4 @@
-package DIT043PROJECT.clothingshop.src.EF1.ItemOptions;
-
-import static DIT043PROJECT.clothingshop.src.EF1.ItemOptions.Input.response;
+package ItemOptions;
 
 public class StartMenu {
 
@@ -9,26 +7,29 @@ public class StartMenu {
                 "\n0. Close system." +
                 "\n1. Open Item options." +
                 "\n2. Open Review options." +
-                "\n3. Open Transaction History options.");
+                "\n3. Open Transaction History options." );
 
-        System.out.print("\nType an option number: ");
+
     }
 
     public static void putInOption () {
+            int response;
+
         do {
-            Input.askOption();
+           optionsList();
+            response = UserInput.inputInt("\nType an option number: ");
 
             switch (response) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
+                    Menu.printMenu();
                     break;
                 case 2:
-                    // Akuen add the reference to your code block here
+                    ReviewOption.reviewsMenu();
                     break;
                 case 3:
-                    MenuThree.optionsList();
                     MenuThree.putInOption();       // For example, I am referring to the code I wrote in
                     break;                          // method MenuThree in class OnePointFour
                 default:
