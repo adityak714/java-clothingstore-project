@@ -26,8 +26,8 @@ the bottom button called Terminal, and type "git pull", then it will sync all up
 Then whatever changes you make, save them, and then once you are done, click on the tick icon on top-right (Commit)
 And then select all the files to be commited, and press (Commit & Push).
 
-2.1,2.2,2.3 = Anton,
+2.1,2.2,2.3 = Anton
 
-2.4,2.5 = Akuien,
+2.4,2.5 = Akuien
 
-2.6,2.7 = Adi,
+2.6,2.7 = Adi
