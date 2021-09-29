@@ -27,5 +27,7 @@ Then whatever changes you make, save them, and then once you are done, click on 
 And then select all the files to be commited, and press (Commit & Push).
 
 2.1,2.2,2.3 = Anton,
+
 2.4,2.5 = Akuien,
+
 2.6,2.7 = Adi,
