@@ -14,7 +14,7 @@ Complete group reflection form
 1.2 = Anton
 1.3 = Akuien
 
-**How to edit: **
+**How to edit:**
 
 Create a local copy by clicking green button (Code) and copying HTTPS link onto IntelliJ.                      
                      
