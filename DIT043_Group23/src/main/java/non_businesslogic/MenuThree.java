@@ -21,6 +21,7 @@ public class MenuThree {
 
     static void putInOption() {
         int response;
+        Facade facade;
 
         do {
             optionsList();
@@ -31,8 +32,8 @@ public class MenuThree {
                     StartMenu.putOption();
                     break;
                 case 1:
-                    Facade.getTotalProfit();
-                    /** This block is having some issues, so ignore the red marking for the moment.*/
+                    facade = new Facade();
+                    /*This block is having some issues, so ignore the red marking for the moment.*/
 
                     break;
                 case 2:
