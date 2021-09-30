@@ -33,8 +33,8 @@ public class MenuThree {
                     break;
                 case 1:
                     facade = new Facade();
+                    facade.getTotalProfit();
                     /*This block is having some issues, so ignore the red marking for the moment.*/
-
                     break;
                 case 2:
 
