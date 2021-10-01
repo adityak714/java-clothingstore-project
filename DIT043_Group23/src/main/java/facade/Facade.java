@@ -9,10 +9,7 @@ public class Facade {
     // This class only has the skeleton of the methods used by the test.
     // You must fill in this class with your own code. You can (and should) create more classes
     // that implement the functionalities listed in the Facade and in the Test Cases.
-
-    public Facade() { }
-
-    public String createItem(String itemID, String itemName, double unitPrice){
+    public String createItem(String itemID, String itemName, double unitPrice) {
         return "";
     }
 
@@ -21,6 +18,7 @@ public class Facade {
     }
 
     public String removeItem(String itemID) {
+        itemID = "";
         return "";
     }
 

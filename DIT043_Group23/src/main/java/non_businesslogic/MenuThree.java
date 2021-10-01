@@ -21,33 +21,35 @@ public class MenuThree {
 
     static void putInOption() {
         int response;
+
         Facade facade;
 
         do {
             optionsList();
             response = UserInput.inputInt("Type an option number: ");
+            facade = new Facade();
 
             switch (response) {
                 case 0:
                     StartMenu.putOption();
                     break;
                 case 1:
-                    facade = new Facade();
                     facade.getTotalProfit();
                     /*This block is having some issues, so ignore the red marking for the moment.*/
                     break;
                 case 2:
-
+                    facade.getTotalUnitsSold();
                     // Print total units sold from all item purchases
                     break;
                 case 3:
+                    facade.printItemTransactions("");
                     // Print the total number of item transactions made
                     break;
                 case 4:
+                    facade.getTotalTransactions();
                     // Print all transactions made.
                     break;
                 case 5:
-
                     // Print the total profit of a specific item.
                     break;
                 case 6:
