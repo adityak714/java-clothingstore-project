@@ -17,6 +17,9 @@ public class CreateItem {
     private final String name;
     private double price;
 
+    private static ArrayList <CreateItem> allItems = new ArrayList<CreateItem>();
+
+
 
     public CreateItem (String id, String name, double price) {
     //pointing to the declared attributes in the class.
