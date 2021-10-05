@@ -26,7 +26,7 @@ public class Menu {
                    StartMenu.putOption();
                     break;
                 case 1:
-                    CreateItem.Create();
+                    CreateItem.CreatingItem();
                     break;
                 case 2:
                     System.out.print("RemoveItem();");

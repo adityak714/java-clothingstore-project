@@ -29,6 +29,16 @@ public class UserInput {
         scanner.nextLine();
         return valueDouble;
     }
+
+    public static char inputChar(String message){
+        //takes user input as a char.
+        System.out.println(message);
+        char valueChar = scanner.next().charAt(0);
+        scanner.nextLine();
+        return valueChar;
+
+    }
+
    
 
 }
