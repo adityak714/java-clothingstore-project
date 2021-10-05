@@ -4,7 +4,7 @@ public class Menu {
 
     public static final String EOL = System.lineSeparator();
 
-    public static void printMenu(){
+    public void printMenu(){
 
         int input;
 
@@ -21,12 +21,14 @@ public class Menu {
 
             input = UserInput.inputInt(EOL + "Type an option number: ");
 
+            ItemController itemController = new ItemController();
+
             switch(input) {
                 case 0:
                    StartMenu.putOption();
                     break;
                 case 1:
-                    CreateItem.CreatingItem();
+                    itemController.CreatingItem();
                     break;
                 case 2:
                     System.out.print("RemoveItem();");
