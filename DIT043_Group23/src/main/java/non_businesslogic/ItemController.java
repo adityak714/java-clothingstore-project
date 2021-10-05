@@ -6,25 +6,32 @@ import java.util.ArrayList;
 public class ItemController {
 
 
-private static ArrayList <Item> items = new ArrayList<Item>(); 
+private ArrayList <Item> items;
+
+public ItemController(ArrayList<Item>items){
+    
+    this.items = new ArrayList<Item>();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //EF 2.1 I want to create items in my system 
 // so that I can sell them in my system.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*public static boolean CreatingItem() {
