@@ -6,28 +6,18 @@ import java.util.ArrayList;
 public class ItemController {
 
 
-private ArrayList <Item> items;
+
+private ArrayList<Item> items;
 
 public ItemController(ArrayList<Item>items){
     
-    this.items = new ArrayList<Item>();
+    items = new ArrayList<Item>(); 
 
 }
 
+public ArrayList<Item> getItems(){ return this.items; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+public void setItem(ArrayList<Item> items){ this.items = items; }
 
 
 //EF 2.1 I want to create items in my system 
@@ -77,6 +67,56 @@ public ItemController(ArrayList<Item>items){
         
   
     
-  */  
+  */
+
+  //2.4
+  //2.5
+ 
+
+//2.6
+public String printItem(String itemID) {
+    double price = 0;
+    String name = "";
+
+    
+    do {
+        if () {
+            price = Item.getPrice();
+            name = CreateItem.Create().getName();
+
+            DecimalFormat truncate = new DecimalFormat("#.##");
+            truncate.setRoundingMode(RoundingMode.DOWN);
+            price = Double.parseDouble(truncate.format(itemPrice));
+
+            // TA
+            // Is this method of printing a single particular item workable?
+
+        } else {
+            System.out.println("Item" + itemID + " was not registered yet.");
+        }
+    } while (ids.contains(itemID));
+
+    return String.format(" %s: %s. " + price + " SEK ", itemID, name);
+    return "";
+}
+
+//2.7
+public String printAllItems() {
+    String fullItemsList = "All registered items. " + Menu.EOL;
+    String eachItem = String.format(" %s: %s. " + CreateItem.Create().getPrice() + " SEK ",
+            CreateItem.Create().getID(), CreateItem.Create().getName());
+
+    return fullItemsList + eachItem.repeat(ids.size());
+  
+}
+
+
+
+
+
+
+
+
+  
 }
 
