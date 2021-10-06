@@ -1,20 +1,16 @@
 package facade;
 
-import java.util.ArrayList;
+import non_businesslogic.Item;
+import non_businesslogic.ItemController;
+import non_businesslogic.Menu;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class Facade {
 
-    private ArrayList<String> ids = new ArrayList<>();
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<Double> prices = new ArrayList<>();
-
-    // TA
-    // Is it fine if variables are declared like this in the body of the facade?
-
-    public ArrayList<String> getIds() {return ids;}
-    public ArrayList<Double> getPrices() {return prices;}
-    public ArrayList<String> getNames() {return names;}
+    ItemController itemController = new ItemController();
 
     public Facade() {}
 
@@ -23,15 +19,15 @@ public class Facade {
     // that implement the functionalities listed in the Facade and in the Test Cases.
 
     public String createItem(String itemID, String itemName, double unitPrice) {
-        ids.add(itemID);
-        names.add(itemName);
-        prices.add(unitPrice);
+        if (itemController.CreatingItem(itemID, itemName, unitPrice)) {
+            return ("Item " + itemID + " was registered successfully.");
+        }
 
-        return "";
+        return ("Invalid data for item. Item cannot be created. ");
     }
 
-    public String printItem(String itemID) {
-        return "";
+    public String printItem(String id) {
+        return itemController.printItem(id);
     }
 
     public String removeItem(String itemID) {
@@ -151,7 +147,7 @@ public class Facade {
     }
 
     public String printAllItems() {
-        return "";
+        return itemController.printItems();
     }
 
     public String printMostProfitableItems() {

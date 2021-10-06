@@ -13,8 +13,6 @@ public class Item {
         this.price = price;
     }
 
-    public Item() {}
-
     //Get the id, name, price, but only name and price can be changed. 
     public String getID(){ return id; }
 
@@ -22,7 +20,7 @@ public class Item {
 
     public double getPrice(){ return price; }
 
-    public void setName(String newName){ this.name = newName; }
+    public void setName(String newName) { this.name = newName; }
     
     public void setPrice(double newPrice){ this.price = newPrice; }
 

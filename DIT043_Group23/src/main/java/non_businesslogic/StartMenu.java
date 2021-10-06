@@ -17,7 +17,7 @@ public class StartMenu {
 
         do {
             optionsList();
-            response = UserInput.inputInt(EOL + "Type an option number: ");
+            response = Utilities.inputInt(EOL + "Type an option number: ");
 
             switch (response) {
                 case 0:

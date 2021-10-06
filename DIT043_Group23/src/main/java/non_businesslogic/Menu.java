@@ -1,10 +1,12 @@
 package non_businesslogic;
 
+import facade.Facade;
+
 public class Menu {
 
     public static final String EOL = System.lineSeparator();
 
-    public void printMenu(){
+    public static void printMenu(){
 
         int input;
 
@@ -19,16 +21,15 @@ public class Menu {
             + EOL + "5. Update an item's name. "
             + EOL + "6. Update an item's price. ");
 
-            input = UserInput.inputInt(EOL + "Type an option number: ");
+            input = Utilities.inputInt(EOL + "Type an option number: ");
 
-            ItemController itemController = new ItemController();
+            Facade facade = new Facade();
 
             switch(input) {
                 case 0:
-                   StartMenu.putOption();
+                    StartMenu.putOption();
                     break;
                 case 1:
-                    itemController.CreatingItem();
                     break;
                 case 2:
                     System.out.print("RemoveItem();");

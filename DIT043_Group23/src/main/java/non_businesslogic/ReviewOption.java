@@ -9,7 +9,7 @@ public class ReviewOption {
         int optionNumber;
 
         do {
-            optionNumber = UserInput.inputInt(EOL + "Review options menu: " + EOL +
+            optionNumber = Utilities.inputInt(EOL + "Review options menu: " + EOL +
                     "0. Return to Main Menu. " + EOL +
                     "1. Create a review for an Item." + EOL +
                     "2. Print a specific review of an Item." + EOL +

@@ -26,7 +26,7 @@ public class MenuThree {
 
         do {
             optionsList();
-            response = UserInput.inputInt("Type an option number: ");
+            response = Utilities.inputInt("Type an option number: ");
             facade = new Facade();
 
             switch (response) {

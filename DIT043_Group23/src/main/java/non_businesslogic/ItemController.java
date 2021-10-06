@@ -1,7 +1,5 @@
 package non_businesslogic;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +10,6 @@ public class ItemController {
     private List<Item> items;
     public List<Item> getItems(){ return this.items; }
     public void setItems(ArrayList<Item> items){ this.items = items; }
-    Item item;
 
     //CONSTRUCTOR
     public ItemController() {
@@ -22,36 +19,32 @@ public class ItemController {
     //METHODS
     public Item getItem(String itemID) {
 
-        for (Item items : getItems()) {
-            if (item.getID().contains(itemID)) {
-                return items;
+        for (Item item : getItems()) {
+            if (item.getID().equals(itemID)) {
+                return item;
             }
         }
         return null;
     }
 
     //EF 2.1 -- I want to create items in my system so that I can sell them in my system.
-    public boolean CreatingItem() {
+    public boolean CreatingItem(String id, String name, double price) {
 
-        String id = UserInput.inputString(Menu.EOL + "Type an ID number for the new item(4 digits): ");
-        String name = UserInput.inputString("Create a name for the new item: ");
-        double price = UserInput.inputDouble("Enter a price for the new item: ");
+        // id = UserInput.inputString(Menu.EOL + "Type an ID number for the new item(4 digits): ");
+        // name = UserInput.inputString("Create a name for the new item: ");
+        // price = UserInput.inputDouble("Enter a price for the new item: ");
 
-            //2.2 I want to avoid the creation of items with invalid data
-            // so that I only have reliable data in my system.
-        Item item =  new Item(id, name, price);
+        //2.2 I want to avoid the creation of items with invalid data
+        //    so that I only have reliable data in my system.
 
-        if(id.isEmpty() || name.isEmpty() || price <= 0 || items.contains(item)){
-            System.out.println("Invalid data for item.");
-            System.out.print("Item cannot be created");
+        if(id.isEmpty() || name.isEmpty() || price <= 0) {
             return false;
         }
 
-        items.add(item);
-        System.out.println("Item is created.");
-
-        return true;
+        Item item = new Item(id, name, price);
+        getItems().add(item);
         //QuitOrProceed();
+        return true;
     }
 
 /*    public static char QuitOrProceed() {
@@ -68,29 +61,29 @@ public class ItemController {
 
 
     //EF 2.6 - Printing the overview of one single item given its ID
-    public String printItem(String itemID) {
-        double price = 0;
-        String name = "";
-
-        if (item.getID().contains(itemID)) {
-            price = getItem(itemID).getPrice();
-
-            DecimalFormat truncate = new DecimalFormat("#.##");
-            truncate.setRoundingMode(RoundingMode.DOWN);
-            price = Double.parseDouble(truncate.format(price));
-
-        } else {
-            System.out.println("Item" + itemID + " was not registered yet.");
-            }
-
-        return String.format(" %s: %s. " + price + " SEK ", itemID, name);
-    }
 
     //2.7 - Printing the entire list of items that are registered
-    public String printAllItems() {
-        String fullItemsList = "All registered items. " + Menu.EOL;
-        String eachItem = String.format(" %s: %s. " + item.getPrice() + " SEK ", item.getID(), item.getName());
-        return fullItemsList + eachItem.repeat(items.size());
+    public String printItems() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("All registered items:").append(Menu.EOL);
+
+        for (Item i : getItems()) {
+            sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
+            sb.append(Menu.EOL);
+        }
+        return sb.toString();
+    }
+
+    public String printItem(String id) {
+        String name = getItem(id).getName();
+        double price = getItem(id).getPrice();
+
+        if (getItem(id) == null) {
+            return("Item" + id + " was not registered yet.");
+        }
+
+        return String.format("%s: %s. " + String.format("%.2f", price) + " SEK", id, name);
     }
 }
 
