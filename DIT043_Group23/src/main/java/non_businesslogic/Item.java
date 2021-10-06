@@ -20,7 +20,7 @@ public class Item {
 
     public String getName(){ return name; } 
 
-    public double getPrice(){ return price; }
+    public static double getPrice(){ return price; }
 
     public void setName(String newName){ this.name = newName; }
     
