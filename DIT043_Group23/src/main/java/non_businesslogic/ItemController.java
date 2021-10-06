@@ -51,6 +51,32 @@ public class ItemController {
 
       //2.4
 
+    public double buyItem(String itemID, int itemsAmount){
+
+        String itemId = UserInput.inputString ( "Enter the specific ID for the item you are buying: ");
+        int itemsAmount = UserInput.inputInt( "Enter the number of items:  ");
+        final int DISCOUNT_THRESHOLD =4 ;
+
+        if (item.getID().contains(itemId)) {
+            double unitPrice = Item.getPrice();
+
+            if ( itemsAmount <= DISCOUNT_THRESHOLD) {
+                double itemsPrice = (itemsAmount * unitPrice);
+
+
+
+            } if (itemsAmount > DISCOUNT_THRESHOLD) {
+                int extraItems = itemsAmount - DISCOUNT_THRESHOLD;
+                double itemsPrice = (4 * unitPrice) + extraItems * (unitPrice * (1.0-0.3));
+                return itemsPrice;
+            }
+
+        } else {
+            System.out.println("-1");
+
+        }
+
+    }
 
 
 
