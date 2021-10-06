@@ -13,11 +13,8 @@ public class Item {
         this.price = price;
     }
 
-<<<<<<< HEAD
-=======
     //public Item() {}
-
->>>>>>> c60d78e59b356525615a897e9e720594f1207d8f
+    
     //Get the id, name, price, but only name and price can be changed. 
     public String getID(){ return id; }
 
