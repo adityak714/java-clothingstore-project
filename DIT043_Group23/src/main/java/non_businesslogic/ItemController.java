@@ -64,7 +64,6 @@ public class ItemController {
                 double itemsPrice = (itemsAmount * unitPrice);
 
 
-
             } if (itemsAmount > DISCOUNT_THRESHOLD) {
                 int extraItems = itemsAmount - DISCOUNT_THRESHOLD;
                 double itemsPrice = (4 * unitPrice) + extraItems * (unitPrice * (1.0-0.3));
@@ -75,7 +74,6 @@ public class ItemController {
             System.out.println("-1");
 
         }
-
     }
 
 
