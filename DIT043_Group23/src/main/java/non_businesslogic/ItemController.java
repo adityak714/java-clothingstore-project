@@ -30,22 +30,29 @@ public class ItemController {
         return null;
     }
 
-    //EF 2.1 -- I want to create items in my system so that I can sell them in my system.
+    //EF 2.1 -- I want to create items in my system so that I can sell them in my system. 
     public boolean CreatingItem() {
 
         String id = UserInput.inputString(Menu.EOL + "Type an ID number for the new item(4 digits): ");
         String name = UserInput.inputString("Create a name for the new item: ");
         double price = UserInput.inputDouble("Enter a price for the new item: ");
 
-            //2.2 I want to avoid the creation of items with invalid data
-            // so that I only have reliable data in my system.
-        Item item =  new Item(id, name, price);
-
-        if(id.isEmpty() || name.isEmpty() || price <= 0 || items.contains(item)){
-            System.out.println("Invalid data for item.");
-            System.out.print("Item cannot be created");
+        
+        if(id.length() != 3){
+            
+            System.out.println("Ivalid ID length.");
             return false;
         }
+
+        //2.2 I want to avoid the creation of items with invalid data
+        // so that I only have reliable data in my system.
+        if(id.isEmpty() || name.isEmpty() || price <= 0 || items.contains(item)){
+            System.out.println("Invalid data for item.");
+            System.out.println("Item cannot be created.");
+            return false;
+        }
+        
+        Item item =  new Item(id, name, price);
 
         items.add(item);
         System.out.println("Item is created.");
@@ -53,6 +60,34 @@ public class ItemController {
         return true;
         //QuitOrProceed();
     }
+
+    //EF 2.3 
+    public String updatingName(){
+        
+       String input = UserInput.inputString("Enter the ID of the item that you want to change: ");
+       
+       if(input == item.getID()){
+
+        getItem(item.getID());
+        printItem(item.getID());
+
+        String updatedName = UserInput.inputString("Enter the new name for the item: ");
+        
+        if(updatedName.isEmpty()){
+            System.out.println("Invalid data for item. ");
+            return false;
+        }
+        
+        item.getID.setName(updatedName);
+
+    }
+
+
+}
+    //public double updatingPrice(){
+
+   // }
+
 
 /*    public static char QuitOrProceed() {
 

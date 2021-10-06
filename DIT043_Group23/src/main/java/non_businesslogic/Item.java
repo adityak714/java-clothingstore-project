@@ -13,7 +13,7 @@ public class Item {
         this.price = price;
     }
 
-    public Item() {}
+    //public Item() {}
 
     //Get the id, name, price, but only name and price can be changed. 
     public String getID(){ return id; }
