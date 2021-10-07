@@ -4,6 +4,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemController {
 
@@ -20,14 +21,15 @@ public class ItemController {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
-
+           Item empty = new Item("","", 0.0);
     public Item getItem(String itemID) {
         for (Item item : items) {
-            if (item.getID().equals(itemID)) {
-                return item;
+            if (Objects.equals(item.getID(), itemID)) {
+               // (items.contains(getItem(itemID)))
+               return item;
             }
         }
-        return null;
+       return empty;
     }
 
     public void setItem(ArrayList<Item> items) {
@@ -37,9 +39,7 @@ public class ItemController {
     //EF 2.1 -- I want to create items in my system so that I can sell them in my system.
     public boolean CreatingItem(String id, String name, double price) {
 
-        // id = UserInput.inputString(Menu.EOL + "Type an ID number for the new item(4 digits): ");
-        // name = UserInput.inputString("Create a name for the new item: ");
-        // price = UserInput.inputDouble("Enter a price for the new item: ");
+        //
 
         //2.2 I want to avoid the creation of items with invalid data
         //    so that I only have reliable data in my system.
@@ -121,27 +121,26 @@ public class ItemController {
             final int DISCOUNT_THRESHOLD = 4;
             double itemsPrice = 0.0;
 
-            if (!(getItem(itemID) == null)) {
-
+            if (!(getItem(itemID).equals(empty))) {
+               // (!(getItem(itemID) == null))
                 double unitPrice = getItem(itemID).getPrice();
 
                 if (amount <= DISCOUNT_THRESHOLD) {
                     itemsPrice = (amount * unitPrice);
+                    return itemsPrice;
 
 
                 }
-                if (amount > DISCOUNT_THRESHOLD) {
+
                     int extraItems = amount - DISCOUNT_THRESHOLD;
-                    itemsPrice = (4 * unitPrice) + extraItems * (unitPrice * (0.7));
+                    itemsPrice = (DISCOUNT_THRESHOLD * unitPrice) + extraItems * (unitPrice * (0.7));
+                    DecimalFormat df = new DecimalFormat (" #.##");
+                    df.setRoundingMode(RoundingMode.FLOOR);
+                    return Double.parseDouble(df.format(itemsPrice));
+
                 }
 
-            } else {
                 return -1.0;
-
-            }
-            DecimalFormat df = new DecimalFormat (" #.##");
-            df.setRoundingMode(RoundingMode.FLOOR);
-            return Double.parseDouble(df.format(itemsPrice));
         }
 
 
@@ -161,9 +160,10 @@ public class ItemController {
         public String printItem(String id) {
             String name = getItem(id).getName();
             double price = getItem(id).getPrice();
+            Item desiredItem = getItem(id);
 
-            if (getItem(id) == null) {
-                return("Item" + id + " was not registered yet.");
+            if (!(items.contains(desiredItem)) || desiredItem.equals(empty)) {
+                return("Item " + id + " was not registered yet.");
             }
 
             return String.format("%s: %s. " + String.format("%.2f", price) + " SEK", id, name);
@@ -172,11 +172,15 @@ public class ItemController {
         //2.7 - Printing the entire list of items that are registered
         public String printItems () {
             StringBuilder sb = new StringBuilder();
-            sb.append("All registered items:").append(ItemOptions.EOL);
 
-            for (Item i : getItems()) {
-                sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
-                sb.append(ItemOptions.EOL);
+                sb.append("All registered items:").append(ItemOptions.EOL);
+                for (Item i : getItems()) {
+                    sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
+                    sb.append(ItemOptions.EOL);
+                }
+            if (items.isEmpty()) {
+                return "No items registered yet.";
+
             }
 
             return sb.toString();

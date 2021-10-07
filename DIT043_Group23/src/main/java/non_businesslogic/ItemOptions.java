@@ -2,6 +2,8 @@ package non_businesslogic;
 
 import facade.Facade;
 
+import java.awt.*;
+
 public class ItemOptions {
 
     public static final String EOL = System.lineSeparator();
@@ -40,8 +42,10 @@ public class ItemOptions {
                     startMenu.putOption();
                     break;
                 case 1:
-                    // Move input declarations here
-//                    facade.createItem();
+                   String id = Utilities.inputString(EOL + "Type an ID number for the new item(4 digits): ");
+                   String name = Utilities.inputString("Create a name for the new item: ");
+                   double  price = Utilities.inputDouble("Enter a price for the new item: ");
+                   facade.createItem(id, name, price);
                     break;
                 case 2:
                     System.out.print("RemoveItem();");
