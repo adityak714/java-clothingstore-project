@@ -19,7 +19,7 @@ public class Facade {
             return ("Item " + itemID + " was registered successfully.");
         }
 
-        return ("Invalid data for item. Item cannot be created. ");
+        return ("Invalid data for item.");
     }
 
     public String printItem(String id) {

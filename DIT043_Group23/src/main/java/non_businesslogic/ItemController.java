@@ -67,13 +67,16 @@ public class ItemController {
 
             //String newName = Utilities.inputString("Enter the new name for the item: ");
 
-            if(!newName.isEmpty()){
-                getItem(itemID).setName(newName);
-
-            } else {
-                return "Invalid data for item";
+            if(newName.isEmpty()){
+                return "Invalid data for item.";
             }
-        } 
+            else {
+                getItem(itemID).setName(newName);
+            }
+        }
+        else {
+            return ("Item " + itemID + " was not registered yet.");
+        }
 
         return "Item " + getItem(itemID).getID() + " was updated successfully.";
     }
@@ -88,12 +91,15 @@ public class ItemController {
 
             //String newName = Utilities.inputString("Enter the new name for the item: ");
 
-            if(newPrice <= 0 ){
-                return "Invalid data for item";
+            if(newPrice <= 0){
+                return "Invalid data for item.";
             }
-
-            getItem(itemID).setPrice(newPrice);
-
+            else {
+                getItem(itemID).setPrice(newPrice);
+            }
+        }
+        else {
+            return ("Item " + itemID + " was not registered yet.");
         }
 
         return "Item " + getItem(itemID).getID() + " was updated successfully.";
@@ -133,7 +139,7 @@ public class ItemController {
                 }
 
             } else {
-                System.out.println("-1");
+                return -1.0;
 
             }
             DecimalFormat df = new DecimalFormat (" #.##");
