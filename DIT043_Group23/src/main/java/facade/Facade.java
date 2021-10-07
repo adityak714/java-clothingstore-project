@@ -27,7 +27,8 @@ public class Facade {
     }
 
     public String removeItem(String itemID) {
-        return "";
+
+        return itemController.removeItem(itemID).toString() ;
     }
 
     public boolean containsItem(String itemID) {
@@ -35,7 +36,8 @@ public class Facade {
     }
 
     public double buyItem(String itemID, int amount) {
-        return 0.0;
+
+        return itemController.buyItem(itemID, amount);
     }
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
@@ -135,11 +137,11 @@ public class Facade {
     }
 
     public String updateItemName(String itemID, String newName) {
-        return "";
+        return itemController.updatingName(itemID, newName).toString();
     }
 
     public String updateItemPrice(String itemID, double newPrice) {
-        return "";
+        return itemController.updatingPrice(itemID, newPrice).toString();
     }
 
     public String printAllItems() {

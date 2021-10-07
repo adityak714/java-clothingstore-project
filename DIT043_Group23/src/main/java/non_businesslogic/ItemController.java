@@ -1,5 +1,8 @@
 package non_businesslogic;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,21 +59,44 @@ public class ItemController {
 
     //EF 2.3
 
-    public String updatingName(){
+    public String updatingName(String itemID, String newName){
 
         //String itemID = Utilities.inputString("Enter the ID of the item to update the name: ");
 
-        if(itemID == items.getID()){
+        if(items.contains(getItem(itemID))) {
 
-            //String updatedName = Utilities.inputString("Enter the new name for the item: ");
+            //String newName = Utilities.inputString("Enter the new name for the item: ");
 
-            if(!updatedName.isEmpty()){
-                items.setName(updatedName);
+            if(!newName.isEmpty()){
+                getItem(itemID).setName(newName);
+
+            } else {
+                return "Invalid data for item";
             }
-
         } 
 
-        return updatedName;
+        return "Item " + getItem(itemID).getID() + " was updated successfully.";
+    }
+
+
+
+    public String updatingPrice(String itemID, double newPrice){
+
+        //String itemID = Utilities.inputString("Enter the ID of the item to update the name: ");
+
+        if(items.contains(getItem(itemID))) {
+
+            //String newName = Utilities.inputString("Enter the new name for the item: ");
+
+            if(newPrice <= 0 ){
+                return "Invalid data for item";
+            }
+
+            getItem(itemID).setPrice(newPrice);
+
+        }
+
+        return "Item " + getItem(itemID).getID() + " was updated successfully.";
     }
 
 /*    public static char QuitOrProceed() {
@@ -84,46 +110,48 @@ public class ItemController {
 
         //2.4
 
-        public double buyItem (String itemID,int itemsAmount){
+        public double buyItem (String itemID,int amount){
 
-            String itemId = Utilities.inputString("Enter the specific ID for the item you are buying: ");
-            itemsAmount = Utilities.inputInt("Enter the number of items:  ");
+
+           // String itemId = Utilities.inputString("Enter the specific ID for the item you are buying: ");
+           // amount = Utilities.inputInt("Enter the number of items:  ");
             final int DISCOUNT_THRESHOLD = 4;
+            double itemsPrice = 0.0;
 
-            if (getItem(itemID) == null) {
+            if (!(getItem(itemID) == null)) {
+
                 double unitPrice = getItem(itemID).getPrice();
 
-                if (itemsAmount <= DISCOUNT_THRESHOLD) {
-                    double itemsPrice = (itemsAmount * unitPrice);
+                if (amount <= DISCOUNT_THRESHOLD) {
+                    itemsPrice = (amount * unitPrice);
 
 
                 }
-                if (itemsAmount > DISCOUNT_THRESHOLD) {
-                    int extraItems = itemsAmount - DISCOUNT_THRESHOLD;
-                    double itemsPrice = (4 * unitPrice) + extraItems * (unitPrice * (1.0 - 0.3));
-                    return itemsPrice;
+                if (amount > DISCOUNT_THRESHOLD) {
+                    int extraItems = amount - DISCOUNT_THRESHOLD;
+                    itemsPrice = (4 * unitPrice) + extraItems * (unitPrice * (0.7));
                 }
 
             } else {
                 System.out.println("-1");
 
             }
-            return 0.0;
+            DecimalFormat df = new DecimalFormat (" #.##");
+            df.setRoundingMode(RoundingMode.FLOOR);
+            return Double.parseDouble(df.format(itemsPrice));
         }
 
 
-        //2.5
-        public void removeItem (String itemID){
-            String itemId = Utilities.inputString("Enter the specific ID for the item to be removed: ");
+       // 2.5
+        public String removeItem (String itemID){
+           // String itemId = Utilities.inputString("Enter the specific ID for the item to be removed: ");
 
-            if (items.contains(itemId)) {
-                items.remove(itemId);
-                System.out.println("Item " + itemId + " was successfully removed.");
+            if (items.contains(getItem(itemID))) {
+                items.remove(getItem(itemID));
+                return ("Item " + itemID + " was successfully removed.");
 
-
-            } else {
-                System.out.println("Item " + itemId + " could not be removed.");
             }
+                return ("Item " + itemID + " could not be removed.");
         }
 
         //EF 2.6 - Printing the overview of one single item given its ID
