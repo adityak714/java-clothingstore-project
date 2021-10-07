@@ -7,9 +7,12 @@ public class ItemController {
 
     //ATTRIBUTES
     private List<Item> items;
-    Item item;
     public List<Item> getItems() {
         return this.items;
+    }
+
+    public ItemController() {
+        items = new ArrayList<>();
     }
 
     public void setItems(ArrayList<Item> items) {
@@ -17,7 +20,7 @@ public class ItemController {
     }
 
     public Item getItem(String itemID) {
-        for (Item item : getItems()) {
+        for (Item item : items) {
             if (item.getID().equals(itemID)) {
                 return item;
             }
@@ -44,7 +47,7 @@ public class ItemController {
         }
 
         Item item = new Item(id, name, price);
-        getItems().add(item);
+        items.add(item);
         return true;
         //QuitOrProceed
     }
@@ -66,8 +69,8 @@ public class ItemController {
             itemsAmount = Utilities.inputInt("Enter the number of items:  ");
             final int DISCOUNT_THRESHOLD = 4;
 
-            if (item.getID().contains(itemId)) {
-                double unitPrice = item.getPrice();
+            if (getItem(itemID) == null) {
+                double unitPrice = getItem(itemID).getPrice();
 
                 if (itemsAmount <= DISCOUNT_THRESHOLD) {
                     double itemsPrice = (itemsAmount * unitPrice);
