@@ -10,9 +10,9 @@ _Group 23_
 Complete individual reflection form
 Complete group reflection form 
 
-1.1,1.4 = Adi
-1.2 = Anton
-1.3 = Akuien
+3.1,3.2,3.3= Akuien
+3.4,3.5= Anton
+3.6,3.7,3.8= Adi
 
 **How to edit:**
 
