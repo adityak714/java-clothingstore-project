@@ -3,6 +3,8 @@ package non_businesslogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.Utilities;
+
 public class ItemController {
 
     //ATTRIBUTES
@@ -50,6 +52,25 @@ public class ItemController {
         items.add(item);
         return true;
         //QuitOrProceed
+    }
+
+    //EF 2.3
+
+    public String updatingName(){
+
+        //String itemID = Utilities.inputString("Enter the ID of the item to update the name: ");
+
+        if(itemID == items.getID()){
+
+            //String updatedName = Utilities.inputString("Enter the new name for the item: ");
+
+            if(!updatedName.isEmpty()){
+                items.setName(updatedName);
+            }
+
+        } 
+
+        return updatedName;
     }
 
 /*    public static char QuitOrProceed() {
