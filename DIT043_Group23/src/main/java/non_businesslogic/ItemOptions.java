@@ -2,8 +2,6 @@ package non_businesslogic;
 
 import facade.Facade;
 
-import java.awt.*;
-
 public class ItemOptions {
 
     public static final String EOL = System.lineSeparator();
@@ -36,31 +34,44 @@ public class ItemOptions {
             + EOL + "6. Update an item's price. ");
 
             input = Utilities.inputInt(EOL + "Type an option number: ");
+            String id;
+            String name;
+            double price;
+            int amount;
+            String newName;
+            double newPrice;
 
             switch(input) {
                 case 0:
                     startMenu.putOption();
                     break;
                 case 1:
-                   String id = Utilities.inputString(EOL + "Type an ID number for the new item(4 digits): ");
-                   String name = Utilities.inputString("Create a name for the new item: ");
-                   double  price = Utilities.inputDouble("Enter a price for the new item: ");
-                   facade.createItem(id, name, price);
+                    id = Utilities.inputString(EOL + "Type an ID number for the new item: ");
+                    name = Utilities.inputString("Create a name for the new item: ");
+                    price = Utilities.inputDouble("Enter a price for the new item: ");
+                    facade.createItem(id, name, price);
                     break;
                 case 2:
-                    System.out.print("RemoveItem();");
+                    id = Utilities.inputString(EOL + "Type the ID of the item to be removed: ");
+                    facade.removeItem(id);
                     break;
                 case 3:
-                    System.out.print("PrintItem();");
+                    facade.printAllItems();
                     break;
                 case 4:
-                    System.out.print("BuyItem();");
+                    id = Utilities.inputString(EOL + "Type the ID of the item you would like to purchase: ");
+                    amount = Utilities.inputInt("Enter the amount of this item you would like to purchase: ");
+                    facade.buyItem(id, amount);
                     break;
                 case 5:
-                    System.out.print("UpdateItemName();");
+                    id = Utilities.inputString(EOL + "Type the ID of the item to update the name of: ");
+                    newName = Utilities.inputString("Set new name as: ");
+                    facade.updateItemName(id, newName);
                     break;
                 case 6:
-                    System.out.print("UpdateItemPrice();");
+                    id = Utilities.inputString(EOL + "Type the ID of the item to update the price of: ");
+                    newPrice = Utilities.inputDouble("Set new price as: ");
+                    facade.updateItemPrice(id, newPrice);
                     break;
                 default:
                     System.out.println("Invalid menu option. Please type another option" + EOL);

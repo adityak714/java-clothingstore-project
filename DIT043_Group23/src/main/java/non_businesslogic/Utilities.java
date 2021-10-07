@@ -1,7 +1,4 @@
 package non_businesslogic;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 
@@ -21,7 +18,6 @@ public class Utilities {
         //takes user input as a string.
         System.out.print(message);
         String valueString = scanner.nextLine();
-        scanner.nextLine();
         return valueString;
     }
 
