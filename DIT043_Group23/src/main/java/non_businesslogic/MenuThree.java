@@ -4,34 +4,42 @@ import facade.Facade;
 
 public class MenuThree {
 
-    static final String EOL = System.lineSeparator();
-
-    static void optionsList() {
-        System.out.println(EOL + "Transaction History options menu:" + EOL +
-                "0. Return to Main Menu." + EOL +
-                "1. Print total profit from all item purchases." + EOL +
-                "2. Print total units sold from all item purchases." + EOL +
-                "3. Print the total number of item transactions made." + EOL +
-                "4. Print all transactions made." + EOL +
-                "5. Print the total profit of a specific item." + EOL +
-                "6. Print the number of units sold of a specific item." + EOL +
-                "7. Print all transactions of a specific item." + EOL +
-                "8. Print item with highest profit." + EOL);
+    private Facade facade;
+    public Facade getFacade() {
+        return facade;
     }
 
-    static void putInOption() {
+    private StartMenu startMenu;
+    public StartMenu getStartMenu() {
+        return startMenu;
+    }
+
+    static void optionsList() {
+        System.out.println(ItemOptions.EOL + "Transaction History options menu:" + ItemOptions.EOL +
+                "0. Return to Main Menu." + ItemOptions.EOL +
+                "1. Print total profit from all item purchases." + ItemOptions.EOL +
+                "2. Print total units sold from all item purchases." + ItemOptions.EOL +
+                "3. Print the total number of item transactions made." + ItemOptions.EOL +
+                "4. Print all transactions made." + ItemOptions.EOL +
+                "5. Print the total profit of a specific item." + ItemOptions.EOL +
+                "6. Print the number of units sold of a specific item." + ItemOptions.EOL +
+                "7. Print all transactions of a specific item." + ItemOptions.EOL +
+                "8. Print item with highest profit." + ItemOptions.EOL);
+    }
+
+    void putInOption() {
         int response;
 
-        Facade facade;
+        facade = new Facade();
+        startMenu = new StartMenu();
 
         do {
             optionsList();
             response = Utilities.inputInt("Type an option number: ");
-            facade = new Facade();
 
             switch (response) {
                 case 0:
-                    StartMenu.putOption();
+                    startMenu.putOption();
                     break;
                 case 1:
                     facade.getTotalProfit();
@@ -62,7 +70,7 @@ public class MenuThree {
                     // Print item with the highest profit.
                     break;
                 default:
-                    System.out.println("Invalid menu option. Please type another menu option." + EOL);
+                    System.out.println("Invalid menu option. Please type another menu option." + ItemOptions.EOL);
                     optionsList();
                     break;
             }

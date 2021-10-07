@@ -1,10 +1,25 @@
 package non_businesslogic;
 
+import facade.Facade;
+
 public class ReviewOption {
 
     public static final String EOL = System.lineSeparator();
 
-    public static void reviewsMenu() {
+    private Facade facade;
+    public Facade getFacade() {
+        return facade;
+    }
+
+    private StartMenu startMenu;
+    public StartMenu getStartMenu() {
+        return startMenu;
+    }
+
+    public void reviewsMenu() {
+
+        facade = new Facade();
+        startMenu = new StartMenu();
 
         int optionNumber;
 
@@ -25,7 +40,7 @@ public class ReviewOption {
 
             switch (optionNumber) {
                 case 0:
-                    StartMenu.putOption();
+                    startMenu.putOption();
                     break;
                 case 1:
                     System.out.println("CreateReview().");

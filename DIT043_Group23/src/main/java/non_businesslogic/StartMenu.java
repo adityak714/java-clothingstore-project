@@ -2,38 +2,46 @@ package non_businesslogic;
 
 public class StartMenu {
 
-    static final String EOL = System.lineSeparator();
+    private ItemOptions itemOptions;
+
+    private ReviewOption reviewOption;
+
+    private MenuThree menuThree;
 
     public static void optionsList() {
-        System.out.println(EOL + "Main Menu: Please choose among the options below." + EOL +
-                "0. Close system." + EOL +
-                "1. Open Item options." + EOL +
-                "2. Open Review options." + EOL +
+        System.out.println(ItemOptions.EOL + "Main Menu: Please choose among the options below." + ItemOptions.EOL +
+                "0. Close system." + ItemOptions.EOL +
+                "1. Open Item options." + ItemOptions.EOL +
+                "2. Open Review options." + ItemOptions.EOL +
                 "3. Open Transaction History options." );
     }
 
-    public static void putOption() {
+    public void putOption() {
             int response;
 
-        do {
+            itemOptions = new ItemOptions();
+            reviewOption = new ReviewOption();
+            menuThree = new MenuThree();
+
+            do {
             optionsList();
-            response = Utilities.inputInt(EOL + "Type an option number: ");
+            response = Utilities.inputInt(ItemOptions.EOL + "Type an option number: ");
 
             switch (response) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    Menu.printMenu();
+                    itemOptions.printMenu();
                     break;
                 case 2:
-                    ReviewOption.reviewsMenu();
+                    reviewOption.reviewsMenu();
                     break;
                 case 3:
-                    MenuThree.putInOption();
+                    menuThree.putInOption();
                     break;
                 default:
-                    System.out.println("Invalid menu option. Please type another menu option." + EOL);
+                    System.out.println("Invalid menu option. Please type another menu option." + ItemOptions.EOL);
                     break;
             }
         } while (response < 0 || response > 3);

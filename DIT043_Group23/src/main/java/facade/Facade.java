@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Facade {
 
-    ItemController itemController = new ItemController();
+    private final ItemController ITEMCONTROLLER = new ItemController();
 
     public Facade() {}
 
@@ -15,7 +15,7 @@ public class Facade {
     // that implement the functionalities listed in the Facade and in the Test Cases.
 
     public String createItem(String itemID, String itemName, double unitPrice) {
-        if (itemController.CreatingItem(itemID, itemName, unitPrice)) {
+        if (ITEMCONTROLLER.CreatingItem(itemID, itemName, unitPrice)) {
             return ("Item " + itemID + " was registered successfully.");
         }
 
@@ -23,12 +23,11 @@ public class Facade {
     }
 
     public String printItem(String id) {
-        return itemController.printItem(id);
+        return ITEMCONTROLLER.printItem(id);
     }
 
     public String removeItem(String itemID) {
-
-        return itemController.removeItem(itemID).toString() ;
+        return ITEMCONTROLLER.removeItem(itemID);
     }
 
     public boolean containsItem(String itemID) {
@@ -36,8 +35,7 @@ public class Facade {
     }
 
     public double buyItem(String itemID, int amount) {
-
-        return itemController.buyItem(itemID, amount);
+        return ITEMCONTROLLER.buyItem(itemID, amount);
     }
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
@@ -137,15 +135,15 @@ public class Facade {
     }
 
     public String updateItemName(String itemID, String newName) {
-        return itemController.updatingName(itemID, newName).toString();
+        return ITEMCONTROLLER.updatingName(itemID, newName);
     }
 
     public String updateItemPrice(String itemID, double newPrice) {
-        return itemController.updatingPrice(itemID, newPrice).toString();
+        return ITEMCONTROLLER.updatingPrice(itemID, newPrice);
     }
 
     public String printAllItems() {
-        return itemController.printItems();
+        return ITEMCONTROLLER.printItems();
     }
 
     public String printMostProfitableItems() {

@@ -1,12 +1,9 @@
 package non_businesslogic;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.text.Utilities;
 
 public class ItemController {
 
@@ -175,11 +172,11 @@ public class ItemController {
         //2.7 - Printing the entire list of items that are registered
         public String printItems () {
             StringBuilder sb = new StringBuilder();
-            sb.append("All registered items:").append(Menu.EOL);
+            sb.append("All registered items:").append(ItemOptions.EOL);
 
             for (Item i : getItems()) {
                 sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
-                sb.append(Menu.EOL);
+                sb.append(ItemOptions.EOL);
             }
 
             return sb.toString();
