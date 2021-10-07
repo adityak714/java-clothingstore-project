@@ -52,7 +52,6 @@ public class ItemController {
         desiredItem = getItem(itemID);
 
         if(items.contains(desiredItem)) {
-
             if(newName.isEmpty()){
                 return "Invalid data for item.";
             }
@@ -72,12 +71,7 @@ public class ItemController {
     public String updatingPrice(String itemID, double newPrice){
         desiredItem = getItem(itemID);
 
-        //String itemID = Utilities.inputString("Enter the ID of the item to update the name: ");
-
         if(items.contains(desiredItem)) {
-
-            //String newName = Utilities.inputString("Enter the new name for the item: ");
-
             if(newPrice <= 0){
                 return "Invalid data for item.";
             }
@@ -92,7 +86,7 @@ public class ItemController {
         return "Item " + desiredItem.getID() + " was updated successfully.";
     }
 
-/*    public static char QuitOrProceed() {
+    /*  public static char QuitOrProceed() {
 
         char quitOrProceedInput = UserInput.inputChar("Press 'q' to quit to the previous menu. If you wish to proceed, press 'p'. ");
         if (quitOrProceedInput == 'q') {
@@ -103,9 +97,6 @@ public class ItemController {
 
     //2.4
     public double buyItem (String itemID,int amount){
-
-       // String itemId = Utilities.inputString("Enter the specific ID for the item you are buying: ");
-       // amount = Utilities.inputInt("Enter the number of items:  ");
         final int DISCOUNT_THRESHOLD = 4;
         double itemsPrice;
         desiredItem = getItem(itemID);
@@ -133,8 +124,7 @@ public class ItemController {
 
     // 2.5
     public String removeItem (String itemID){
-       // String itemId = Utilities.inputString("Enter the specific ID for the item to be removed: ");
-        desiredItem = getItem(itemID);
+       desiredItem = getItem(itemID);
 
         if (items.contains(desiredItem)) {
             items.remove(desiredItem);
