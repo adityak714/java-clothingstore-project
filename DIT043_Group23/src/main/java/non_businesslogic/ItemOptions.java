@@ -64,8 +64,8 @@ public class ItemOptions {
                     facade.buyItem(id, amount);
                     break;
                 case 5:
-                    id = Utilities.inputString(EOL + "Type the ID of the item to update the name of: ");
-                    newName = Utilities.inputString("Set new name as: ");
+                    id = Utilities.inputString(EOL + "Enter the ID of the item to update the name: ");
+                    newName = Utilities.inputString("Enter the new name for the item: ");
                     facade.updateItemName(id, newName);
                     break;
                 case 6:
