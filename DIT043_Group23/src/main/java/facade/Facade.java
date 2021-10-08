@@ -43,7 +43,7 @@ public class Facade {
     }
 
     public String reviewItem(String itemID, int reviewGrade) {
-        return "";
+        return reviewItem(itemID, "", reviewGrade);
     }
 
     public String getItemCommentsPrinted(String itemID) {
