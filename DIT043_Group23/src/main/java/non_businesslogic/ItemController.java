@@ -44,10 +44,18 @@ public class ItemController {
         Item item = new Item(id, name, price);
         items.add(item);
         return true;
-        //QuitOrProceed
     }
 
-    //EF 2.3
+    /*  public static char QuitOrProceed() {
+
+        char quitOrProceedInput = UserInput.inputChar("Press 'q' to quit to the previous menu. If you wish to proceed, press 'p'. ");
+        if (quitOrProceedInput == 'q') {
+            Menu.printMenu();
+        }
+        return quitOrProceedInput;
+    }*/
+
+    //EF 2.3 UPDATING AN ITEM IN THE SYSTEM.
     public String updatingName(String itemID, String newName){
         desiredItem = getItem(itemID);
 
@@ -86,16 +94,9 @@ public class ItemController {
         return "Item " + desiredItem.getID() + " was updated successfully.";
     }
 
-    /*  public static char QuitOrProceed() {
 
-        char quitOrProceedInput = UserInput.inputChar("Press 'q' to quit to the previous menu. If you wish to proceed, press 'p'. ");
-        if (quitOrProceedInput == 'q') {
-            Menu.printMenu();
-        }
-        return quitOrProceedInput;
-    }*/
 
-    //2.4
+    //2.4 BUYING AN ITEM.
     public double buyItem (String itemID,int amount){
         final int DISCOUNT_THRESHOLD = 4;
         double itemsPrice;
@@ -122,7 +123,7 @@ public class ItemController {
     }
 
 
-    // 2.5
+    // 2.5 REMOVING AN ITEM.
     public String removeItem (String itemID){
        desiredItem = getItem(itemID);
 
@@ -134,7 +135,7 @@ public class ItemController {
             return ("Item " + itemID + " could not be removed.");
     }
 
-    //2.6 - Printing the overview of one single item given its ID
+    //2.6 - PRINTING THE OVERVIEW OF ONE ITEM.
     public String printItem(String itemID) {
         desiredItem = getItem(itemID);
 
@@ -148,7 +149,7 @@ public class ItemController {
         return String.format("%s: %s. " + String.format("%.2f", price) + " SEK", itemID, name);
     }
 
-    //2.7 - Printing the entire list of items that are registered
+    //2.7 - PRINTING A LIST OF ALL REGISTERED ITEMS.
     public String printItems () {
         StringBuilder sb = new StringBuilder();
 
