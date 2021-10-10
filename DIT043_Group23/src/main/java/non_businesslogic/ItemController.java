@@ -9,15 +9,25 @@ import java.util.Objects;
 public class ItemController {
 
     //ATTRIBUTES
+
     private final List<Item> items;
+   // List<Review> reviewsList = Item.getReviews();
+
+
+
     public List<Item> getItems() {
         return this.items;
     }
+
+
+
     public ItemController() {
         items = new ArrayList<>();
     }
 
+
     private final Item empty = new Item("","", 0.0);
+    private final Review emptyReview = new Review("",0);
 
     private Item desiredItem;
 
@@ -30,6 +40,18 @@ public class ItemController {
         }
        return empty;
     }
+
+    public Review getReview(String itemID) {
+        Item desiredItem = getItem(itemID);
+
+        for(Review review : desiredItem.getReviews()){
+            return review;
+        }
+        return emptyReview;
+    }
+
+
+
 
     //2.1 -- I want to create items in my system so that I can sell them in my system.
     public boolean CreatingItem(String id, String name, double price) {
@@ -165,4 +187,35 @@ public class ItemController {
 
         return sb.toString();
     }
+//3.1
+    public String CreateReview(String itemID, String reviewComment, int reviewGrade){
+
+        // String itemID = Utilities.inputString("Enter the specific ID of the item: ");
+        desiredItem = getItem(itemID);
+
+
+        if (items.contains(desiredItem)){
+
+            Review review = new Review(reviewComment, reviewGrade);
+
+
+            desiredItem.getReviews().add(review);
+            return "Your item review was registered successfully.";
+        }
+
+    return "Item " + desiredItem + " was not registered yet.";
+    }
+
+    public double getMeanItem(String itemID){
+
+        int reviewGrade = getReview(itemID).getGrade();
+
+
+        for(int i = 0; i < )
+
+        if (items.contains(desiredItem)){
+
+        }
+    }
+
 }

@@ -43,7 +43,7 @@ public class ReviewOption {
                     startMenu.putOption();
                     break;
                 case 1:
-                    System.out.println("CreateReview().");
+                    String itemID = Utilities.inputString("Enter the specific ID of the item: ");
                     break;
                 case 2:
                     System.out.println("PrintSpecificReviews()");

@@ -39,7 +39,8 @@ public class Facade {
     }
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
-        return "";
+
+        return ITEMCONTROLLER.CreateReview(itemID, reviewComment, reviewGrade);
     }
 
     public String reviewItem(String itemID, int reviewGrade) {
