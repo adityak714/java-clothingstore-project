@@ -9,7 +9,7 @@ public class Item {
     private final String id;
     private String name;
     private double price;
-    private ArrayList<Review> reviewsList;
+    private final ArrayList<Review> reviewsList;
 
     public Item (String id, String name, double price) {
         this.id = id;
@@ -28,7 +28,7 @@ public class Item {
 
     public ArrayList<Review> getReviews(){ return reviewsList; }
 
-
+    public boolean hasSameID(String anotherName){ return this.id.equals(anotherName); }
 
 
     public void setName(String newName) { this.name = newName; }

@@ -4,13 +4,15 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ItemController {
 
     //ATTRIBUTES
 
     private final List<Item> items;
+    private List<Integer> listOfGrades;
+
+
    // List<Review> reviewsList = Item.getReviews();
 
 
@@ -29,17 +31,34 @@ public class ItemController {
     private final Item empty = new Item("","", 0.0);
     private final Review emptyReview = new Review("",0);
 
-    private Item desiredItem;
+    private Item desiredItem = getItem();
 
     public Item getItem(String itemID) {
         for (Item item : items) {
-            if (Objects.equals(item.getID(), itemID)) {
+            if (/*Objects.equals(item.getID(), itemID)*/item.hasSameID(itemID)) {
                // (items.contains(getItem(itemID)))
                return item;
             }
         }
        return empty;
     }
+
+    public boolean getGrades(String itemID){
+        Item desiredItem = getItem(itemID);
+        return listOfGrades.addAll(desiredItem.getReviews());
+
+    }
+
+/*
+    public boolean containsItem(String currentItem){
+        for(Item item : items){
+            if(item.hasSameID(currentItem)){
+                return true;
+            }
+        }
+        return false;
+    }
+*/
 
     public Review getReview(String itemID) {
         Item desiredItem = getItem(itemID);
@@ -49,6 +68,15 @@ public class ItemController {
         }
         return emptyReview;
     }
+
+
+    public Item getReviews(String itemID){
+        if(items.contains(desiredItem)){
+        return getReviews(itemID);
+        }
+      return null;
+    }
+
 
 
 
@@ -207,15 +235,45 @@ public class ItemController {
     }
 
     public double getMeanItem(String itemID){
+        double sum = 0.0;
+        double reviewMean = 0.0;
+        double truncatedMean = 0.0;
+        boolean noReviews = getItem(itemID).getReviews().isEmpty();
 
-        int reviewGrade = getReview(itemID).getGrade();
+        Item review = getReviews(itemID);
+
+        DecimalFormat df = new DecimalFormat (" #.#");
+        df.setRoundingMode(RoundingMode.FLOOR);
+
+        truncatedMean = Double.parseDouble(df.format(reviewMean));
 
 
-        for(int i = 0; i < )
 
-        if (items.contains(desiredItem)){
+        for (Integer currentGrade : listOfGrades) {
 
+            sum =+ currentGrade;
+            reviewMean = sum / listOfGrades.size();
+            return reviewMean;
         }
+
+        if (desiredItem.hasSameID(itemID)){
+            return truncatedMean;
+        }
+        else if (desiredItem.hasSameID(itemID) && noReviews){
+
+
+            return "Item " + "item name"  + " has not been reviewed yet.";
+        }
+        else if(!desiredItem.hasSameID(itemID)) {
+            return "Item " + desiredItem + " was not registered yet.";
+        }
+        if (desiredItem.hasSameID(itemID)){
+            return truncatedMean;
+        }
+
+
+    return -1.0;
     }
+
 
 }
