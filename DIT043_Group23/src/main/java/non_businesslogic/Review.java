@@ -21,4 +21,8 @@ public class Review {
     public void setComment(String newReviewComment) {this.reviewComment = newReviewComment;}
     public void setGrade(int newReviewGrade) { this.reviewGrade = newReviewGrade;}
 
+    public String toString() {
+        return "Grade: " + getGrade() + ". " + getComment();
+    }
+
 }
