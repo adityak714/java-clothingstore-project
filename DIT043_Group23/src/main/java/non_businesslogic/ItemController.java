@@ -10,7 +10,8 @@ public class ItemController {
     //ATTRIBUTES
 
     private final List<Item> items;
-    private List<Integer> listOfGrades;
+    private final ArrayList<Integer> listOfGrades = new ArrayList<>();
+    private ArrayList<String> listOfComments;
 
 
    // List<Review> reviewsList = Item.getReviews();
@@ -29,9 +30,10 @@ public class ItemController {
 
 
     private final Item empty = new Item("","", 0.0);
-    private final Review emptyReview = new Review("",0);
+    //private final Review emptyReview = new Review("",0);
 
-    private Item desiredItem = getItem();
+
+    private Item desiredItem;
 
     public Item getItem(String itemID) {
         for (Item item : items) {
@@ -43,11 +45,36 @@ public class ItemController {
        return empty;
     }
 
-    public boolean getGrades(String itemID){
+    public ArrayList<Integer> getGrades(String itemID){
         Item desiredItem = getItem(itemID);
-        return listOfGrades.addAll(desiredItem.getReviews());
+
+        for(Review review : desiredItem.getReviews()){
+            listOfGrades.add(review.getGrade());
+            return listOfGrades;
+        }
+
+
+        return listOfGrades;
 
     }
+
+    public ArrayList<String> getActualComments(String itemID){
+        Item desiredItem = getItem(itemID);
+        listOfComments = new ArrayList<>();
+
+        if(desiredItem.hasSameID(itemID)) {
+            for (Review review : desiredItem.getReviews()) {
+
+
+                    listOfComments.add(review.getComment());
+
+
+            }
+        }
+
+        return listOfComments;
+    }
+
 
 /*
     public boolean containsItem(String currentItem){
@@ -60,6 +87,7 @@ public class ItemController {
     }
 */
 
+/*
     public Review getReview(String itemID) {
         Item desiredItem = getItem(itemID);
 
@@ -68,6 +96,7 @@ public class ItemController {
         }
         return emptyReview;
     }
+*/
 
 
     public Item getReviews(String itemID){
@@ -216,6 +245,22 @@ public class ItemController {
         return sb.toString();
     }
 //3.1
+    Review review;
+    String successfulRegistration = "Your item review was registered successfully.";
+
+    public String CreateReview(String itemID, int reviewGrade){
+        desiredItem = getItem(itemID);
+
+        if(items.contains(desiredItem)) {
+           review = new Review(reviewGrade);
+           desiredItem.getReviews().add(review);
+           return successfulRegistration;
+       }
+
+        return "Item " + desiredItem + " was not registered yet.";
+    }
+
+
     public String CreateReview(String itemID, String reviewComment, int reviewGrade){
 
         // String itemID = Utilities.inputString("Enter the specific ID of the item: ");
@@ -224,56 +269,48 @@ public class ItemController {
 
         if (items.contains(desiredItem)){
 
-            Review review = new Review(reviewComment, reviewGrade);
-
-
+            review = new Review(reviewComment, reviewGrade);
             desiredItem.getReviews().add(review);
-            return "Your item review was registered successfully.";
+            return successfulRegistration;
         }
 
     return "Item " + desiredItem + " was not registered yet.";
     }
-
+//3.4
     public double getMeanItem(String itemID){
         double sum = 0.0;
-        double reviewMean = 0.0;
-        double truncatedMean = 0.0;
+        double reviewMean;
+        double truncatedMean;
         boolean noReviews = getItem(itemID).getReviews().isEmpty();
 
-        Item review = getReviews(itemID);
+        //Item review = getReviews(itemID);
 
         DecimalFormat df = new DecimalFormat (" #.#");
         df.setRoundingMode(RoundingMode.FLOOR);
 
-        truncatedMean = Double.parseDouble(df.format(reviewMean));
-
-
 
         for (Integer currentGrade : listOfGrades) {
 
-            sum =+ currentGrade;
-            reviewMean = sum / listOfGrades.size();
-            return reviewMean;
+            sum += currentGrade;
+
+            return sum;
         }
+
+       reviewMean = sum / getGrades(itemID).size();
+
 
         if (desiredItem.hasSameID(itemID)){
+            truncatedMean = Double.parseDouble(df.format(reviewMean));
+
             return truncatedMean;
         }
-        else if (desiredItem.hasSameID(itemID) && noReviews){
-
-
-            return "Item " + "item name"  + " has not been reviewed yet.";
+        if (desiredItem.hasSameID(itemID) && noReviews){
+            return 0.0;
         }
-        else if(!desiredItem.hasSameID(itemID)) {
-            return "Item " + desiredItem + " was not registered yet.";
-        }
-        if (desiredItem.hasSameID(itemID)){
-            return truncatedMean;
-        }
-
 
     return -1.0;
     }
+
 
 
 }

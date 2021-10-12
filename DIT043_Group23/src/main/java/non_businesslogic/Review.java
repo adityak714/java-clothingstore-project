@@ -13,16 +13,22 @@ public class Review {
         this.reviewGrade = reviewGrade;
 
     }
+    public Review(int reviewGrade){
+        this.reviewGrade = reviewGrade;
+    }
     // Getters
     public String getComment() {return reviewComment;}
     public int getGrade() {return reviewGrade;}
 
     // Setters
-    public void setComment(String newReviewComment) {this.reviewComment = newReviewComment;}
+    public void setComment(String newReviewComment) { this.reviewComment = newReviewComment;}
     public void setGrade(int newReviewGrade) { this.reviewGrade = newReviewGrade;}
 
     public String toString() {
         return "Grade: " + getGrade() + ". " + getComment();
+    }
+    public String toString2() {
+        return "Grade: " + getGrade() + ". ";
     }
 
 }

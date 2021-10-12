@@ -43,20 +43,18 @@ public class Facade {
         return ITEMCONTROLLER.CreateReview(itemID, reviewComment, reviewGrade);
     }
 
-    public String reviewItem(String itemID, int reviewGrade) {
-        return reviewItem(itemID, "", reviewGrade);
-    }
+    public String reviewItem(String itemID, int reviewGrade) { return ITEMCONTROLLER.CreateReview(itemID, reviewGrade); }
 
     public String getItemCommentsPrinted(String itemID) {
         return "";
     }
 
     public List<String> getItemComments(String itemID) {
-        return null;
+        return ITEMCONTROLLER.getActualComments(itemID);
     }
 
     public double getItemMeanGrade(String itemID) {
-        return -1.0;
+        return ITEMCONTROLLER.getMeanItem(itemID);
     }
 
     public int getNumberOfReviews(String itemID) {
