@@ -285,10 +285,6 @@ public class ItemController {
 
         //Item review = getReviews(itemID);
 
-        DecimalFormat df = new DecimalFormat (" #.#");
-        df.setRoundingMode(RoundingMode.FLOOR);
-
-
         for (Integer currentGrade : listOfGrades) {
 
             sum += currentGrade;
@@ -296,12 +292,13 @@ public class ItemController {
             return sum;
         }
 
-       reviewMean = sum / getGrades(itemID).size();
+        reviewMean = sum / getGrades(itemID).size();
+        int truncatingMean = (int)(reviewMean * 10);
+
 
 
         if (desiredItem.hasSameID(itemID)){
-            truncatedMean = Double.parseDouble(df.format(reviewMean));
-
+            truncatedMean = (double) truncatingMean / 10;
             return truncatedMean;
         }
         if (desiredItem.hasSameID(itemID) && noReviews){
