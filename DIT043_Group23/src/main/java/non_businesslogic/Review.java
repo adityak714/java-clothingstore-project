@@ -14,8 +14,12 @@ public class Review {
 
     }
     public Review(int reviewGrade){
+
+        this.reviewComment = "";
         this.reviewGrade = reviewGrade;
+
     }
+
     // Getters
     public String getComment() {return reviewComment;}
     public int getGrade() {return reviewGrade;}
@@ -27,8 +31,6 @@ public class Review {
     public String toString() {
         return "Grade: " + getGrade() + ". " + getComment();
     }
-    public String toString2() {
-        return "Grade: " + getGrade() + ". ";
-    }
+
 
 }

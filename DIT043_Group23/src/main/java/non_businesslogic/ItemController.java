@@ -10,19 +10,11 @@ public class ItemController {
     //ATTRIBUTES
 
     private final List<Item> items;
-    private final ArrayList<Integer> listOfGrades = new ArrayList<>();
-    private ArrayList<String> listOfComments;
-
-
-   // List<Review> reviewsList = Item.getReviews();
-
 
 
     public List<Item> getItems() {
         return this.items;
     }
-
-
 
     public ItemController() {
         items = new ArrayList<>();
@@ -45,34 +37,32 @@ public class ItemController {
        return empty;
     }
 
-    public ArrayList<Integer> getGrades(String itemID){
+    public List<Integer> getGrades(String itemID){
         Item desiredItem = getItem(itemID);
+        List<Integer> grades = new ArrayList<>();
 
         for(Review review : desiredItem.getReviews()){
-            listOfGrades.add(review.getGrade());
-            return listOfGrades;
+            grades.add(review.getGrade());
+
         }
-
-
-        return listOfGrades;
+        return grades;
 
     }
 
-    public ArrayList<String> getActualComments(String itemID){
+    public List<String> getActualComments(String itemID){
         Item desiredItem = getItem(itemID);
-        listOfComments = new ArrayList<>();
+        List<String> comments = new ArrayList<>();
 
         if(desiredItem.hasSameID(itemID)) {
             for (Review review : desiredItem.getReviews()) {
-
-
-                    listOfComments.add(review.getComment());
-
+                if(!review.getComment().isBlank()){
+                    comments.add(review.getComment());
+                }
 
             }
         }
 
-        return listOfComments;
+        return comments;
     }
 
 
@@ -252,7 +242,7 @@ public class ItemController {
         desiredItem = getItem(itemID);
 
         if(items.contains(desiredItem)) {
-           review = new Review(reviewGrade);
+           review = new Review (reviewGrade);
            desiredItem.getReviews().add(review);
            return successfulRegistration;
        }
@@ -279,33 +269,27 @@ public class ItemController {
 //3.4
     public double getMeanItem(String itemID){
         double sum = 0.0;
-        double reviewMean;
-        double truncatedMean;
-        boolean noReviews = getItem(itemID).getReviews().isEmpty();
+        double truncatedResult;
 
+
+        Item item = getItem(itemID);
+        List<Review> reviews = item.getReviews();
         //Item review = getReviews(itemID);
-
-        for (Integer currentGrade : listOfGrades) {
-
-            sum += currentGrade;
-
+        if(reviews.isEmpty()){
             return sum;
         }
-
-        reviewMean = sum / getGrades(itemID).size();
-        int truncatingMean = (int)(reviewMean * 10);
-
-
-
-        if (desiredItem.hasSameID(itemID)){
-            truncatedMean = (double) truncatingMean / 10;
-            return truncatedMean;
-        }
-        if (desiredItem.hasSameID(itemID) && noReviews){
-            return 0.0;
+        for (Review review : reviews) {
+            sum += review.getGrade();
         }
 
-    return -1.0;
+
+        sum /= reviews.size();
+        double scale = (int) Math.pow(10, 1);
+        truncatedResult = (int) (sum * scale);
+        return truncatedResult / scale;
+
+
+
     }
 
 

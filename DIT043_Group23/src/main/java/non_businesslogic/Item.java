@@ -30,7 +30,6 @@ public class Item {
 
     public boolean hasSameID(String anotherName){ return this.id.equals(anotherName); }
 
-
     public void setName(String newName) { this.name = newName; }
     
     public void setPrice(double newPrice){ this.price = newPrice; }
