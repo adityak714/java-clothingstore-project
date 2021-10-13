@@ -58,7 +58,7 @@ public class Facade {
     }
 
     public int getNumberOfReviews(String itemID) {
-        return -1;
+        return ITEMCONTROLLER.getItem(itemID).getAmountOfReviews();
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {
@@ -70,7 +70,7 @@ public class Facade {
     }
 
     public String printMostReviewedItems() {
-        return "";
+        return ITEMCONTROLLER.printMostReviewedItems();
     }
 
     public List<String> getMostReviewedItems() {
@@ -82,7 +82,7 @@ public class Facade {
     }
 
     public String printLeastReviewedItems() {
-        return "";
+        return ITEMCONTROLLER.printLeastReviewedItems();
     }
 
     public double getTotalProfit() {

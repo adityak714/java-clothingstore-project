@@ -3,6 +3,7 @@ package non_businesslogic;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ItemController {
@@ -10,7 +11,6 @@ public class ItemController {
     //ATTRIBUTES
 
     private final List<Item> items;
-    StringBuilder sb;
 
 
     public List<Item> getItems() {
@@ -50,23 +50,6 @@ public class ItemController {
 
     }
 
-    public List<String> getActualComments(String itemID){
-        Item desiredItem = getItem(itemID);
-        List<String> comments = new ArrayList<>();
-
-        if(desiredItem.hasSameID(itemID)) {
-            for (Review review : desiredItem.getReviews()) {
-                if(!review.getComment().isBlank()){
-                    comments.add(review.getComment());
-                }
-
-            }
-        }
-
-        return comments;
-    }
-
-
 /*
     public boolean containsItem(String currentItem){
         for(Item item : items){
@@ -89,13 +72,6 @@ public class ItemController {
     }
 */
 
-
-
-
-
-
-
-
     //2.1 -- I want to create items in my system so that I can sell them in my system.
     public boolean CreatingItem(String id, String name, double price) {
 
@@ -110,15 +86,6 @@ public class ItemController {
         items.add(item);
         return true;
     }
-
-    /*  public static char QuitOrProceed() {
-
-        char quitOrProceedInput = UserInput.inputChar("Press 'q' to quit to the previous menu. If you wish to proceed, press 'p'. ");
-        if (quitOrProceedInput == 'q') {
-            Menu.printMenu();
-        }
-        return quitOrProceedInput;
-    }*/
 
     //EF 2.3 UPDATING AN ITEM IN THE SYSTEM.
     public String updatingName(String itemID, String newName){
@@ -139,8 +106,6 @@ public class ItemController {
         return "Item " + desiredItem.getID() + " was updated successfully.";
     }
 
-
-
     public String updatingPrice(String itemID, double newPrice){
         desiredItem = getItem(itemID);
 
@@ -158,8 +123,6 @@ public class ItemController {
 
         return "Item " + desiredItem.getID() + " was updated successfully.";
     }
-
-
 
     //2.4 BUYING AN ITEM.
     public double buyItem (String itemID,int amount){
@@ -186,7 +149,6 @@ public class ItemController {
 
             return -1.0;
     }
-
 
     // 2.5 REMOVING AN ITEM.
     public String removeItem (String itemID){
@@ -216,7 +178,7 @@ public class ItemController {
 
     //2.7 - PRINTING A LIST OF ALL REGISTERED ITEMS.
     public String printItems () {
-        sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("All registered items:").append(ItemOptions.EOL);
         for (Item i : getItems()) {
@@ -230,7 +192,8 @@ public class ItemController {
 
         return sb.toString();
     }
-//3.1
+
+    //3.1
     Review review;
     String successfulRegistration = "Your item review was registered successfully.";
 
@@ -245,7 +208,6 @@ public class ItemController {
 
         return "Item " + desiredItem + " was not registered yet.";
     }
-
 
     public String CreateReview(String itemID, String reviewComment, int reviewGrade){
 
@@ -262,7 +224,59 @@ public class ItemController {
 
     return "Item " + desiredItem + " was not registered yet.";
     }
-//3.4
+
+    //3.2
+    public String getPrintedItemReview(String itemID, int reviewNumber){
+
+        String name = getItem(itemID).getName();
+        ArrayList<Review> reviews = getItem(itemID).getReviews();
+        boolean noReviews = getItem(itemID).getReviews().isEmpty();
+        boolean hasItem = getItems().contains(getItem(itemID));
+
+        // First if block to be converted as do while loop in the menu.
+        if(reviewNumber < 1 || reviewNumber > reviews.size()){
+            return "Invalid review number. Choose between 1 and " + reviews.size() + ". ";
+        }
+        if(!hasItem){
+            return "Item " + itemID + " was not registered yet.";
+        }
+
+        if(noReviews){
+            return "Item " + name + " has not been reviewed yet.";
+        }
+        return reviews.get(reviewNumber - 1).toString();
+    }
+
+    //3.3
+    public String printReviews(String itemID){
+        StringBuilder sb = new StringBuilder();
+        String name = getItem(itemID).getName();
+        double price = getItem(itemID).getPrice();
+        boolean noReviews = getItem(itemID).getReviews().isEmpty();
+        boolean hasItem = getItems().contains(getItem(itemID));
+
+        if(!hasItem){
+            return "Item " + itemID + " was not registered yet.";
+        }
+
+        sb.append(String.format("Review(s) for %s: %s. %.2f SEK", itemID, name, price)).append(ItemOptions.EOL);
+
+        if(noReviews){
+            return "Item " + name + " has not been reviewed yet.";
+        }
+
+        for (Review review : getItem(itemID).getReviews()) {
+
+            sb.append(String.format("Grade: %d.%s", review.getGrade(), review.getComment())).append(ItemOptions.EOL);
+                /* sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
+                sb.append(ItemOptions.EOL);*/
+        }
+
+        return sb.toString();
+
+    }
+
+    //3.4
     public double getMeanItem(String itemID){
         double sum = 0.0;
         double reviewMean;
@@ -296,11 +310,26 @@ public class ItemController {
 
     }
 
-//3.6
-    public String printAllReviews(){
-        sb = new StringBuilder();
-        boolean hasItem;
+    //3.5
+    public List<String> getActualComments(String itemID){
+        Item desiredItem = getItem(itemID);
+        List<String> comments = new ArrayList<>();
 
+        if(desiredItem.hasSameID(itemID)) {
+            for (Review review : desiredItem.getReviews()) {
+                if(!review.getComment().isBlank()){
+                    comments.add(review.getComment());
+                }
+
+            }
+        }
+
+        return comments;
+    }
+
+    //3.6
+    public String printAllReviews(){
+        StringBuilder sb = new StringBuilder();
 
         if (items.isEmpty()) {
             return "No items registered yet.";
@@ -309,80 +338,68 @@ public class ItemController {
         sb.append("All registered reviews:").append(ItemOptions.EOL);
         sb.append("------------------------------------").append(ItemOptions.EOL);
 
-
         for (Item item : getItems()) {
             // add later to the menu.
        /*     if(item.getReviews().isEmpty()){
                 sb.append("No items were reviewed yet.").append(ItemOptions.EOL);
                 sb.append("------------------------------------").append(ItemOptions.EOL);
-            }
-*/
+            }*/
             if (!item.getReviews().isEmpty()) {
                 sb.append(String.format("Review(s) for %s: %s. %.2f SEK" + ItemOptions.EOL, item.getID(), item.getName(), item.getPrice()));
-
                 for (Review review : getItem(item.getID()).getReviews()) {
-
                     sb.append(String.format("Grade: %d.%s", review.getGrade(), review.getComment())).append(ItemOptions.EOL);
-
                 }
-
                 sb.append("------------------------------------").append(ItemOptions.EOL);
-
-
             }
+        }
+        return sb.toString();
+    }
 
+    //3.7
+
+    public String printMostReviewedItems() {
+        StringBuilder sb = new StringBuilder();
+
+        if(getItems().isEmpty()){
+            return "No items registered yet.";
+        }
+
+        getItems().sort(Comparator.comparingInt(Item::getAmountOfReviews));
+        Item mostAmountOfReviews = getItems().get(getItems().size() - 1);
+        sb.append(String.format("Most reviews: %d review(s) each.", mostAmountOfReviews.getAmountOfReviews())).append(ItemOptions.EOL);
+
+        for(Item item : getItems()){
+            if(item.getAmountOfReviews() == mostAmountOfReviews.getAmountOfReviews()){
+                sb.append(printItem(item.getID())).append(ItemOptions.EOL);
+            }
         }
 
         return sb.toString();
     }
-//3.3
-    public String printReviews(String itemID){
-        sb = new StringBuilder();
-        String name = getItem(itemID).getName();
-        double price = getItem(itemID).getPrice();
-        boolean noReviews = getItem(itemID).getReviews().isEmpty();
-        boolean hasItem = getItems().contains(getItem(itemID));
 
-        if(!hasItem){
-            return "Item " + itemID + " was not registered yet.";
+    //to be discussed with greg, copying items from previous list into this list
+
+    public String printLeastReviewedItems() {
+        StringBuilder sb = new StringBuilder();
+
+        if(getItems().isEmpty()){
+            return "No items registered yet.";
         }
 
-        sb.append(String.format("Review(s) for %s: %s. %.2f SEK", itemID, name, price)).append(ItemOptions.EOL);
+        getItems().sort(Comparator.comparingInt(Item::getAmountOfReviews));
 
-        if(noReviews){
-            return "Item " + name + " has not been reviewed yet.";
-        }
+        Item leastAmountOfReviews = getItems().get(0);
+        sb.append(String.format("Least reviews: %d review(s) each." + ItemOptions.EOL, leastAmountOfReviews.getAmountOfReviews()));
 
-        for (Review review : getItem(itemID).getReviews()) {
+        for(Item item : getItems()) {
+            System.out.println(getItems().toString());
 
-            sb.append(String.format("Grade: %d.%s", review.getGrade(), review.getComment())).append(ItemOptions.EOL);
-                /* sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
-                sb.append(ItemOptions.EOL);*/
+            if(item.getAmountOfReviews() > 0 /*&&*/){
+                sb.append(item);
+                sb.append(ItemOptions.EOL);
+            }
         }
 
         return sb.toString();
-
     }
-//3.2
-    public String getPrintedItemReview(String itemID, int reviewNumber){
-
-        String name = getItem(itemID).getName();
-        ArrayList<Review> reviews = getItem(itemID).getReviews();
-        boolean noReviews = getItem(itemID).getReviews().isEmpty();
-        boolean hasItem = getItems().contains(getItem(itemID));
-
-        // First if block to be converted as do while loop in the menu.
-        if(reviewNumber < 1 || reviewNumber > reviews.size()){
-            return "Invalid review number. Choose between 1 and " + reviews.size() + ". ";
-        }
-        if(!hasItem){
-            return "Item " + itemID + " was not registered yet.";
-        }
-
-        if(noReviews){
-            return "Item " + name + " has not been reviewed yet.";
-        }
-        return reviews.get(reviewNumber - 1).toString();
-    }
-
 }

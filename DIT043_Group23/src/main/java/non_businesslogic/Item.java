@@ -28,12 +28,18 @@ public class Item {
 
     public ArrayList<Review> getReviews(){ return reviewsList; }
 
+    public int getAmountOfReviews(){return getReviews().size();}
+
     public boolean hasSameID(String anotherName){ return this.id.equals(anotherName); }
 
     public void setName(String newName) { this.name = newName; }
     
     public void setPrice(double newPrice){ this.price = newPrice; }
 
+    @Override
+    public String toString() {
+        return String.format("%s: %s. %.2f SEK", id, name, getPrice());
+    }
 }
     
 
