@@ -62,11 +62,11 @@ public class Facade {
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {
-        return "";
+        return ITEMCONTROLLER.getPrintedItemReview(itemID, reviewNumber);
     }
 
     public String getPrintedReviews(String itemID) {
-        return "";
+        return ITEMCONTROLLER.printReviews(itemID);
     }
 
     public String printMostReviewedItems() {
@@ -130,7 +130,7 @@ public class Facade {
     }
 
     public String printAllReviews() {
-        return "";
+        return ITEMCONTROLLER.printAllReviews();
     }
 
     public String updateItemName(String itemID, String newName) {
