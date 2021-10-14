@@ -1,5 +1,6 @@
 package facade;
 
+import non_businesslogic.Item;
 import non_businesslogic.ItemController;
 
 import java.util.List;
@@ -74,11 +75,11 @@ public class Facade {
     }
 
     public List<String> getMostReviewedItems() {
-        return null;
+        return ITEMCONTROLLER.getMostReviewedItems();
     }
 
     public List<String> getLeastReviewedItems() {
-        return null;
+        return ITEMCONTROLLER.getLeastReviewedItems();
     }
 
     public String printLeastReviewedItems() {
@@ -106,7 +107,7 @@ public class Facade {
     }
 
     public int getUnitsSolds(String itemID) {
-        return -1;
+        return ITEMCONTROLLER.getItem(itemID).getUnitsSold();
     }
 
     public String printAllTransactions() {
@@ -114,19 +115,19 @@ public class Facade {
     }
 
     public String printWorseReviewedItems() {
-        return "";
+        return ITEMCONTROLLER.printWorstReviewedItems();
     }
 
     public String printBestReviewedItems() {
-        return "";
+        return ITEMCONTROLLER.printBestReviewedItems();
     }
 
     public List<String> getWorseReviewedItems() {
-        return null;
+        return ITEMCONTROLLER.getWorstReviewed();
     }
 
     public List<String> getBestReviewedItems() {
-        return null;
+        return ITEMCONTROLLER.getBestReviewedItems();
     }
 
     public String printAllReviews() {
