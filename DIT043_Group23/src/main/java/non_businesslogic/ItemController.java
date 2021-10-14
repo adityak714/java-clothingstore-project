@@ -346,19 +346,15 @@ public class ItemController {
 
         for (Item item : getItems()) {
             // add later to the menu.
-       /*     if(item.getReviews().isEmpty()){
-                sb.append("No items were reviewed yet.").append(ItemOptions.EOL);
-                sb.append("------------------------------------").append(ItemOptions.EOL);
-            }*/
-            if(item.getAmountOfReviews() == 0){
-                return "No items were reviewed yet.";
-            }
             if (!item.getReviews().isEmpty()) {
                 sb.append(String.format("Review(s) for %s: %s. %.2f SEK" + ItemOptions.EOL, item.getID(), item.getName(), item.getPrice()));
                 for (Review review : getItem(item.getID()).getReviews()) {
                     sb.append(String.format("Grade: %d.%s", review.getGrade(), review.getComment())).append(ItemOptions.EOL);
                 }
                 sb.append("------------------------------------").append(ItemOptions.EOL);
+            }
+            if(item.getReviews().isEmpty()){
+                sb.append("No items were reviewed yet.");
             }
         }
         return sb.toString();
