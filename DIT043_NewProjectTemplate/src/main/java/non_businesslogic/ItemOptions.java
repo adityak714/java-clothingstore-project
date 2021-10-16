@@ -12,11 +12,8 @@ public class ItemOptions {
     }
 
     private StartMenu startMenu;
-    public StartMenu getStartMenu() {
-        return startMenu;
-    }
 
-    public void printMenu(){
+    public void itemOptionsMenu() {
         int input;
 
         facade = new Facade();
@@ -25,13 +22,14 @@ public class ItemOptions {
         do {
             System.out.println(EOL + "Item options menu: "
 
-            + EOL + "0. Return to Main Menu. "
-            + EOL + "1. Create an Item. "
-            + EOL + "2. Remove an Item. "
-            + EOL + "3. Print all registered Items. "
-            + EOL + "4. Buy an Item. "
-            + EOL + "5. Update an item's name. "
-            + EOL + "6. Update an item's price. ");
+                    + EOL + "0. Return to Main Menu. "
+                    + EOL + "1. Create an Item. "
+                    + EOL + "2. Remove an Item. "
+                    + EOL + "3. Print all registered Items. "
+                    + EOL + "4. Buy an Item. "
+                    + EOL + "5. Update an item's name. "
+                    + EOL + "6. Update an item's price. "
+                    + EOL + "7. Print a specific item. ");
 
             input = Utilities.inputInt(EOL + "Type an option number: ");
             String id;
@@ -41,7 +39,7 @@ public class ItemOptions {
             String newName;
             double newPrice;
 
-            switch(input) {
+            switch (input) {
                 case 0:
                     startMenu.putOption();
                     break;
@@ -73,10 +71,13 @@ public class ItemOptions {
                     newPrice = Utilities.inputDouble("Set new price as: ");
                     facade.updateItemPrice(id, newPrice);
                     break;
+                case 7:
+                    id = Utilities.inputString(EOL + "Type the ID of the item to be printed: ");
+                    facade.printItem(id);
                 default:
                     System.out.println("Invalid menu option. Please type another option" + EOL);
-                    printMenu();
-             }
-        } while(input < 0 || input > 6);
+                    itemOptionsMenu();
+            }
+        } while (input < 0 || input > 7);
     }
 }
