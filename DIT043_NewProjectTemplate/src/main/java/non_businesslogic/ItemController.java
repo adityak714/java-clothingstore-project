@@ -74,7 +74,6 @@ public class ItemController {
     //2.1 -- I want to create items in my system so that I can sell them in my system.
     public boolean CreatingItem(String id, String name, double price) {
 
-
     /*2.2 -- I want to avoid the creation of items with invalid data
              so that I only have reliable data in my system. */
         if (id.isEmpty() || name.isEmpty() || price <= 0) {

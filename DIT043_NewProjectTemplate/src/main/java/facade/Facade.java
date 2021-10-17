@@ -1,5 +1,6 @@
 package facade;
 
+import non_businesslogic.EmployeeController;
 import non_businesslogic.ItemController;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Map;
 public class Facade {
 
     private final ItemController ITEMCONTROLLER = new ItemController();
+
+    private final EmployeeController EMPLOYEECONTROLLER = new EmployeeController();
 
     // This class only has the skeleton of the methods used by the test.
     // You must fill in this class with your own code. You can (and should) create more classes
@@ -154,6 +157,9 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+        if(EMPLOYEECONTROLLER.createEmployee(employeeID, employeeName, grossSalary)){
+            return "Employee " + employeeID + " was registered successfully.";
+        }
         return "";
     }
 

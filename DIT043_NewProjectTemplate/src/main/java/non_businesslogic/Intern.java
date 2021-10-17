@@ -2,9 +2,17 @@ package non_businesslogic;
 
 public class Intern extends Employee {
 
-    public Intern(String id, String name, double salary) {
+    private int gpa;
+
+    public Intern(String id, String name, double salary, int gpa) {
+
         super(id, name, salary);
+        this.gpa = gpa;
+
+
     }
+    public int getGPA(int gpa){ return gpa;}
+    public void setGPA(int gpa){ this.gpa = gpa; }
 
     //GPA less than or equal to 5: then he/she will not receive a gross salary (i.e., it will be zero).
     //GPA between 5 and 8: then he/she will receive his/her full gross salary.

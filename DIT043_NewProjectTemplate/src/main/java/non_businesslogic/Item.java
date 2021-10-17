@@ -55,7 +55,7 @@ public class Item {
        return truncatedResult;
     }
 
-    public boolean hasSameID(String anotherName){ return this.id.equals(anotherName); }
+    public boolean hasSameID(String anotherID){ return this.id.equals(anotherID); }
 
     public void setName(String newName) { this.name = newName; }
     

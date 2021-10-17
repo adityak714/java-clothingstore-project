@@ -1,10 +1,10 @@
 package non_businesslogic;
 
 public class Employee {
-    private final String id;
-    private String name;
-    private double salary;
-    private double netSalary;
+    protected final String id;
+    protected String name;
+    protected double salary;
+    protected double netSalary;
 
     public Employee(String id, String name, double salary) {
         this.id = id;
@@ -21,7 +21,7 @@ public class Employee {
         return salary;
     }
 
-    public double getNetSalary(){
-        return (salary - (salary * 0.1));
-    }
+    public double getNetSalary(){return (salary * 0.9);}
+
+    public boolean hasSameID(String anotherID){ return this.id.equals(anotherID); }
 }
