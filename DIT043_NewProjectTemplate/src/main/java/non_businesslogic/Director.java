@@ -36,5 +36,4 @@ public class Director extends Employee {
     public String toString(){
         return String.format("%s %s's gross salary is %.2f SEK per month. Dept: %s", degree, name, super.salary, department);
     }
-
 }

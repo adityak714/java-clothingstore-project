@@ -12,6 +12,8 @@ private final List<Employee> employees;
     }
 
     Employee empty = new Employee("", "", 0.0);
+    Employee emptyManager = new Manager("", "", 0.0, "");
+    Employee emptyDirector = new Director("", "", 0.0, "");
 
     public Employee getEmployee(String employeeID){
         for(Employee employee : employees){
@@ -30,6 +32,16 @@ private final List<Employee> employees;
         } else {
             Employee employee = new Employee(employeeID, name, grossSalary);
             employees.add(employee);
+            return true;
+        }
+    }
+
+    public boolean createManager(String employeeID, String name, String degree, double grossSalary){
+        if (employeeID.isEmpty() || name.isEmpty() || grossSalary <= 0 || employees.contains(getEmployee(employeeID))){
+            return false;
+        } else {
+            Employee employee = new Manager(employeeID, name, grossSalary, degree);
+            // need to create a collection to store all managers (and the same for other positions)
             return true;
         }
     }

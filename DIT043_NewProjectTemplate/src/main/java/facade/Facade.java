@@ -161,13 +161,17 @@ public class Facade {
             return "Employee " + employeeID + " was registered successfully.";
         }
         return "";
+        // need to create conditional line of code in case employee creation unsuccessful
     }
 
     public String printEmployee(String employeeID) throws Exception {
-        return "";
+        return EMPLOYEECONTROLLER.getEmployee(employeeID).toString();
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
+        if(EMPLOYEECONTROLLER.createManager(employeeID, employeeName, degree, grossSalary)){
+            return "Employee " + employeeID + " was registered successfully.";
+        }
         return "";
     }
 
@@ -176,7 +180,7 @@ public class Facade {
     }
 
     public double getNetSalary(String employeeID) throws Exception {
-        return -1.0;
+        return EMPLOYEECONTROLLER.getEmployee(employeeID).getNetSalary();
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
