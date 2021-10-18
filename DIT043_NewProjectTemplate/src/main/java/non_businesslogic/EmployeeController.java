@@ -81,12 +81,22 @@ private final List<Employee> employees;
     }
 
     public boolean createIntern(String employeeID, String name, double grossSalary, int gpa) {
-        if(employeeID.isEmpty() || name.isEmpty() || gpa <= 0 || employees.contains(getEmployee(employeeID))){
+        if (employeeID.isEmpty() || name.isEmpty() || gpa <= 0 || employees.contains(getEmployee(employeeID))) {
             return false;
         } else {
             Employee employee = new Intern(employeeID, name, grossSalary, gpa);
             employees.add(employee);
             return true;
         }
+    }
+
+    public String removeEmployee (String employeeID) throws Exception {
+        Employee desiredEmployee = getEmployee(employeeID);
+
+        if (!desiredEmployee.equals(empty)) {
+            employees.remove(desiredEmployee);
+            return ("Employee " + employeeID + " was successfully removed.");
+        }
+        return ("Employee " + employeeID + " could not be removed.");
     }
 }

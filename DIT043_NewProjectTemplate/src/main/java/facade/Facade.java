@@ -194,7 +194,7 @@ public class Facade {
     }
 
     public String removeEmployee(String empID) throws Exception {
-        return "";
+        return EMPLOYEECONTROLLER.removeEmployee(empID);
     }
 
     public String printAllEmployees() throws Exception {

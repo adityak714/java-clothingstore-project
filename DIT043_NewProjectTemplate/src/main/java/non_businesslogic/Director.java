@@ -3,22 +3,25 @@ package non_businesslogic;
 public class Director extends Manager {
 
     private String department;
-    private final double upperBaselineTax = (30000 * 0.2);
-    private String degree;
 
     public Director(String id, String name, double salary, String degree, String department) {
         super(id, name, salary, degree);
-        salary = (double) ((int) salary * 100 / 100);
+        salary = ((int) salary * 100 / 100);
         final int directorBonus = 5000;
-        this.salary = (salary + directorBonus);
-        this.department = department;
+        degree = super.getDegree();
 
-        if(salary > 30000 && salary < 50000){
-           this.salary = salary * 0.8;
+        if(degree == "BSc"){
+            this.salary = salary * 1.1;
         }
-        else if (salary > 50000){
-            this.salary = (6000 + 0.6 * (salary - 50000));
+        if(degree == "MSc"){
+            this.salary = salary * 1.2;
         }
+        if(degree == "PhD"){
+            this.salary = salary * 1.35;
+        }
+
+        this.salary += directorBonus;
+        this.department = department;
     }
 
 /*  Less than 30,000 SEK: the director pays the same taxation as a regular employee (10%) on their final gross salary.
@@ -27,6 +30,23 @@ public class Director extends Manager {
 
     //More sub-branches - Human Resources, Technical, Business
     //Additional fixed salary addition of 5000
+
+    @Override
+    public double getNetSalary() {
+        double netSalary;
+        if(salary <= 30000){
+            netSalary = super.getNetSalary();
+        }
+        else if(salary > 30000 && salary < 50000){
+            netSalary = salary * 0.8;
+        }
+        else {
+            double upperBaselineTax = (30000 * 0.8);
+            netSalary = (upperBaselineTax + (0.6 * (salary - 30000)));
+        }
+        return netSalary;
+    }
+
     public double getSalary(){return this.salary;}
 
     public String getDepartment(){ return department;}

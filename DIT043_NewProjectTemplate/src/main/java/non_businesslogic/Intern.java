@@ -4,24 +4,29 @@ public class Intern extends Employee {
 
     private int gpa;
 
-    public Intern(String id, String name, double salary, int gpa) {
+    public Intern(String id, String name, double salary, int gpa){
         super(id, name, salary);
-        salary = (double) ((int) salary * 100 / 100);
         this.gpa = gpa;
+        final int internBonus = 1000;
+
         if (gpa <= 5) {
             this.salary = 0.0;
-        } else if (gpa <= 8) {
-            this.salary = salary + 1000;
+        } else if (gpa < 8) {
+            this.salary = salary;
+        } else {
+            this.salary = salary + internBonus;
         }
     }
 
     public int getGPA(int gpa){ return gpa;}
     public void setGPA(int newGPA){ this.gpa = newGPA; }
 
-    //GPA less than or equal to 5: then he/she will not receive a gross salary (i.e., it will be zero).
-    //GPA between 5 and 8: then he/she will receive his/her full gross salary.
-    //GPA greater than or equal to 8: then he/she will receive the full gross salary, plus a benefit of 1,000 SEK to reward them for academic excellence.
+    @Override
+    public double getNetSalary() {
+        return getSalary();
+    }
 
-    //No net salary as interns don't pay taxes
-    //Net salary = Gross salary
+    public String toString(){
+        return String.format("%s's gross salary is %.2f SEK per month. GPA: %d", name, getNetSalary(), gpa);
+    }
 }

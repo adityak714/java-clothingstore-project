@@ -2,12 +2,10 @@ package non_businesslogic;
 
 public class Manager extends Employee {
 
-    private String degree;
-
+    protected String degree;
 
     public Manager(String id, String name, double salary, String degree) {
         super(id, name, salary);
-        salary = (double) ((int) salary * 100 / 100);
         this.degree = degree;
         if(degree == "BSc"){
             this.salary = salary * 1.1;
@@ -18,7 +16,6 @@ public class Manager extends Employee {
         if(degree == "PhD"){
             this.salary = salary * 1.35;
         }
-
     }
 
     public String getDegree(){ return degree; }
@@ -29,12 +26,12 @@ public class Manager extends Employee {
          return newValue;
     }*/
 
-    public String toString(){
-<<<<<<< Updated upstream
-        salary =  ((int) salary * Math.pow(10, 2)) / Math.pow(10, 2);
-=======
->>>>>>> Stashed changes
-        return String.format("%s %s's gross salary is %.2f SEK per month.", degree, name, salary);
+    @Override
+    public double getNetSalary() {
+        return truncateSalary(super.getNetSalary(), 2);
     }
 
+    public String toString(){
+        return String.format("%s %s's gross salary is %.2f SEK per month.", degree, name, truncateSalary(salary, 2));
+    }
 }
