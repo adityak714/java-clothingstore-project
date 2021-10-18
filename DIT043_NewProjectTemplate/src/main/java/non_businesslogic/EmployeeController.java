@@ -75,9 +75,7 @@ private final List<Employee> employees;
         } else {
             Employee employee = new Manager(employeeID, name, grossSalary, degree);
             employees.add(employee);
-<<<<<<< Updated upstream
             // need to create a collection to store all managers (and the same for other positions)
-=======
             return true;
         }
     }
@@ -88,7 +86,6 @@ private final List<Employee> employees;
         } else {
             Employee employee = new Intern(employeeID, name, grossSalary, gpa);
             employees.add(employee);
->>>>>>> Stashed changes
             return true;
         }
     }
