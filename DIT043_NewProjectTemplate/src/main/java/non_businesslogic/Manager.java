@@ -7,6 +7,7 @@ public class Manager extends Employee {
 
     public Manager(String id, String name, double salary, String degree) {
         super(id, name, salary);
+        salary = (double) ((int) salary * 100 / 100);
         this.degree = degree;
         if(degree == "BSc"){
             this.salary = salary * 1.1;
@@ -29,7 +30,10 @@ public class Manager extends Employee {
     }*/
 
     public String toString(){
+<<<<<<< Updated upstream
         salary =  ((int) salary * Math.pow(10, 2)) / Math.pow(10, 2);
+=======
+>>>>>>> Stashed changes
         return String.format("%s %s's gross salary is %.2f SEK per month.", degree, name, salary);
     }
 

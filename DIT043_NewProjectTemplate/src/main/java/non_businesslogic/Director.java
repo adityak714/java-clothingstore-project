@@ -1,15 +1,14 @@
 package non_businesslogic;
 
-public class Director extends Employee {
+public class Director extends Manager {
 
     private String department;
     private final double upperBaselineTax = (30000 * 0.2);
     private String degree;
 
-    public Director(String id, String name, double salary, String department) {
-
-        super(id, name, salary);
-
+    public Director(String id, String name, double salary, String degree, String department) {
+        super(id, name, salary, degree);
+        salary = (double) ((int) salary * 100 / 100);
         final int directorBonus = 5000;
         this.salary = (salary + directorBonus);
         this.department = department;

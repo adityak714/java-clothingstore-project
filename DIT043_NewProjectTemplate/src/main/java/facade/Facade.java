@@ -176,6 +176,9 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, int gpa) throws Exception {
+        if(EMPLOYEECONTROLLER.createIntern(employeeID, employeeName, grossSalary, gpa)){
+            return "Employee " + employeeID + " was registered successfully.";
+        }
         return "";
     }
 
@@ -184,6 +187,9 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
+        if(EMPLOYEECONTROLLER.createDirector(employeeID, employeeName, grossSalary, degree, dept)){
+            return "Employee " + employeeID + " was registered successfully.";
+        }
         return "";
     }
 

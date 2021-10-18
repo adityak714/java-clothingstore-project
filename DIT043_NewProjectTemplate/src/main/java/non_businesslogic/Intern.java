@@ -5,14 +5,18 @@ public class Intern extends Employee {
     private int gpa;
 
     public Intern(String id, String name, double salary, int gpa) {
-
         super(id, name, salary);
+        salary = (double) ((int) salary * 100 / 100);
         this.gpa = gpa;
-
-
+        if (gpa <= 5) {
+            this.salary = 0.0;
+        } else if (gpa <= 8) {
+            this.salary = salary + 1000;
+        }
     }
+
     public int getGPA(int gpa){ return gpa;}
-    public void setGPA(int gpa){ this.gpa = gpa; }
+    public void setGPA(int newGPA){ this.gpa = newGPA; }
 
     //GPA less than or equal to 5: then he/she will not receive a gross salary (i.e., it will be zero).
     //GPA between 5 and 8: then he/she will receive his/her full gross salary.
