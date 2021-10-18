@@ -41,6 +41,7 @@ private final List<Employee> employees;
             return false;
         } else {
             Employee employee = new Manager(employeeID, name, grossSalary, degree);
+            employees.add(employee);
             // need to create a collection to store all managers (and the same for other positions)
             return true;
         }

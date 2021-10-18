@@ -23,9 +23,13 @@ public class Manager extends Employee {
     public String getDegree(){ return degree; }
     // Create more branches with degrees; BSc, MSc & PhD (with 10%, 20% & 35% bonus corresponding to each).
     // The bonus should only affect the salary set in the super class, not anywhere else.
+   /* public double truncateSalary(double value, int decimals){
+         double newValue = ((int) value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+         return newValue;
+    }*/
 
     public String toString(){
-
+        salary =  ((int) salary * Math.pow(10, 2)) / Math.pow(10, 2);
         return String.format("%s %s's gross salary is %.2f SEK per month.", degree, name, salary);
     }
 

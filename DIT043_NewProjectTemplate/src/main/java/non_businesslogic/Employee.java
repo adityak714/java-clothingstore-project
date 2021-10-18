@@ -24,4 +24,6 @@ public class Employee {
     public double getNetSalary(){return (salary * 0.9);}
 
     public boolean hasSameID(String anotherID){ return this.id.equals(anotherID); }
+
+
 }
