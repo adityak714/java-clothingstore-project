@@ -50,6 +50,18 @@ public class Director extends Manager {
         return netSalary;
     }
 
+    public void degreeChange(String degree) {
+        this.degree = degree;
+        switch(degree){
+            case "MSc":
+                this.salary = (1.2*((this.salary-5000)/1.1)+5000);
+                break;
+            case "PhD":
+                this.salary = (1.35*((this.salary-5000)/1.2)+5000);
+                break;
+        }
+    }
+
     public double getSalary(){return this.salary;}
 
     public String getDepartment(){ return department;}

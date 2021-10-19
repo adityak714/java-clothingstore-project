@@ -183,9 +183,13 @@ private final List<Employee> employees;
 
     public boolean changeManagerDegree(String empID, String newDegree){
         Manager desiredEmployee = (Manager) getEmployee(empID);
+        Director desiredDirector;
         boolean successful = false;
 
         if(employees.contains(desiredEmployee)){
+            if(desiredEmployee instanceof Director){
+                desiredEmployee = (Director) getEmployee(empID);
+            }
             desiredEmployee.degreeChange(newDegree);
             successful = true;
         }

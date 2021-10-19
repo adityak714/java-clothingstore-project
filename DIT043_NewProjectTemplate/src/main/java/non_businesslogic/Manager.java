@@ -26,10 +26,10 @@ public class Manager extends Employee {
         this.degree = degree;
         switch(degree){
             case "MSc":
-                this.salary = (1.2*((this.salary - 5000)/1.1))+5000;
+                this.salary = (1.2*(this.salary/1.1));
                 break;
             case "PhD":
-                this.salary = (1.35*((this.salary - 5000)/1.2))+5000;
+                this.salary = (1.35*((this.salary)/1.2));
                 break;
         }
     }
