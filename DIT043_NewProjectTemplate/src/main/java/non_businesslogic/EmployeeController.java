@@ -47,6 +47,10 @@ private final List<Employee> employees;
         return ((Intern) emptyIntern);
     }
 
+    protected double truncateSalary(double value, int decimal){
+        return ((int) value * Math.pow(10, decimal)) / Math.pow(10, decimal);
+    }
+
     public EmployeeController(){ this.employees = new ArrayList<>(); }
 
     public boolean createEmployee(String employeeID, String name, double grossSalary) {
@@ -98,5 +102,13 @@ private final List<Employee> employees;
             return ("Employee " + employeeID + " was successfully removed.");
         }
         return ("Employee " + employeeID + " could not be removed.");
+    }
+
+    public double totalNetSalary(){
+        double totalNet = 0.0;
+        for(Employee employee : employees){
+            totalNet += employee.getNetSalary();
+        }
+        return totalNet;
     }
 }

@@ -28,7 +28,7 @@ public class Manager extends Employee {
 
     @Override
     public double getNetSalary() {
-        return truncateSalary(super.getNetSalary(), 2);
+        return super.getNetSalary();
     }
 
     public String toString(){
