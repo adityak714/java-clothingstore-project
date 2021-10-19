@@ -1,5 +1,7 @@
 package non_businesslogic;
 
+import java.util.Objects;
+
 public class Employee {
     protected final String id;
     protected String name;
@@ -18,16 +20,27 @@ public class Employee {
         this.salary = salary;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     protected double getSalary() {
         return salary;
     }
 
-    public double getNetSalary(){
-        return (salary * 0.9);
+    public boolean setSalary(double salary) {
+        this.salary = salary;
+        // Whenever the gross salary is changed, the new salary is adjusted again for the
+        // degree the employee has, regardless of if the degree was changed or not.
+        return true;
     }
 
-    protected double truncateSalary(double value, int decimal){
-        return ((int) value * Math.pow(10, decimal)) / Math.pow(10, decimal);
+    public double getNetSalary(){
+        return (salary * 0.9);
     }
 
     @Override
@@ -37,5 +50,16 @@ public class Employee {
 
     public boolean hasSameID(String anotherID){ return this.id.equals(anotherID); }
 
+    protected double truncateDecimalFormat(double input){
+        int truncatingResult;
+        truncatingResult = (int)(input * 100);
+        double truncatedResult;
+        truncatedResult = (double) truncatingResult / 100;
 
+        return truncatedResult;
+    }
+
+    protected double truncateSalary(double value, int decimal){
+        return (value * Math.pow(10, decimal)) / Math.pow(10, decimal);
+    }
 }

@@ -4,9 +4,12 @@ public class Director extends Manager {
 
     private String department;
 
+    //35000.5 * 1.2 = 42000.6 + 5000 = 47000.6
+    //(47000.6 - 5000)/1.2 = 35000.5
+    //(35000.5 * 1.35) + 5000 = 52250.675;
+
     public Director(String id, String name, double salary, String degree, String department) {
         super(id, name, salary, degree);
-        salary = ((int) salary * 100 / 100);
         final int directorBonus = 5000;
         degree = super.getDegree();
 
@@ -53,6 +56,6 @@ public class Director extends Manager {
     public void setDepartment(String newDepartment){ this.department = newDepartment;}
 
     public String toString(){
-        return String.format("%s %s's gross salary is %.2f SEK per month. Dept: %s", degree, name, super.salary, department);
+        return String.format("%s %s's gross salary is %.2f SEK per month. Dept: %s", degree, name, truncateDecimalFormat(this.salary), department);
     }
 }

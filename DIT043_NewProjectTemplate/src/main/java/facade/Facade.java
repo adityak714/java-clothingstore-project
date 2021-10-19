@@ -190,7 +190,7 @@ public class Facade {
         if(EMPLOYEECONTROLLER.createDirector(employeeID, employeeName, grossSalary, degree, dept)){
             return "Employee " + employeeID + " was registered successfully.";
         }
-        return "";
+        return ""; // Exception
     }
 
     public String removeEmployee(String empID) throws Exception {
@@ -198,7 +198,7 @@ public class Facade {
     }
 
     public String printAllEmployees() throws Exception {
-        return "";
+        return EMPLOYEECONTROLLER.printAllEmployees();
     }
 
     public double getTotalNetSalary() throws Exception {
@@ -206,27 +206,47 @@ public class Facade {
     }
 
     public String printSortedEmployees() throws Exception {
-        return "";
+        return EMPLOYEECONTROLLER.sortEmployeesByGrossSalary();
     }
 
     public String updateEmployeeName(String empID, String newName) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.changeEmployeeName(empID, newName)){
+            return "Employee " + empID + " was updated successfully";
+        }
+
+        return "Employee could not be updated."; //Exception
     }
 
     public String updateInternGPA(String empID, int newGPA) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.changeInternGPA(empID, newGPA)){
+            return "Employee " + empID + " was updated successfully";
+        }
+
+        return "Employee could not be updated."; //Exception
     }
 
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.changeManagerDegree(empID, newDegree)){
+            return "Employee " + empID + " was updated successfully";
+        }
+
+        return "Employee could not be updated."; //Exception
     }
 
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.changeDirectorDept(empID, newDepartment)){
+            return "Employee " + empID + " was updated successfully";
+        }
+
+        return "Employee could not be updated."; //Exception
     }
 
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.changeGrossSalary(empID, newSalary)){
+            return "Employee " + empID + " was updated successfully";
+        }
+
+        return "Employee could not be updated."; //Exception
     }
 
     public Map<String, Integer> mapEachDegree() throws Exception {

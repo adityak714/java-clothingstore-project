@@ -27,6 +27,6 @@ public class Intern extends Employee {
     }
 
     public String toString(){
-        return String.format("%s's gross salary is %.2f SEK per month. GPA: %d", name, getNetSalary(), gpa);
+        return String.format("%s's gross salary is %.2f SEK per month. GPA: %d", name, truncateDecimalFormat(this.salary), gpa);
     }
 }

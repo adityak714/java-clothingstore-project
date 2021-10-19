@@ -1,11 +1,21 @@
 package non_businesslogic;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class EmployeeController {
 
 private final List<Employee> employees;
+
+    protected double truncateDecimalFormat(double input){
+        int truncatingResult;
+        truncatingResult = (int)(input * 100);
+        double truncatedResult;
+        truncatedResult = (double) truncatingResult / 100;
+
+        return truncatedResult;
+    }
 
     public List<Employee> getEmployees() {
         return employees;
@@ -109,6 +119,117 @@ private final List<Employee> employees;
         for(Employee employee : employees){
             totalNet += employee.getNetSalary();
         }
-        return totalNet;
+        return truncateDecimalFormat(totalNet);
     }
+
+    public String printAllEmployees(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("All registered employees:").append(ItemOptions.EOL);
+
+        for (Employee employee : employees) {
+            // add later to the menu.
+                sb.append(employee).append(ItemOptions.EOL);
+        }
+
+        if(employees.isEmpty()){
+            return "No employees registered yet."; //Exception
+        }
+
+        return sb.toString();
+    }
+
+    public String sortEmployeesByGrossSalary(){
+        StringBuilder sb = new StringBuilder();
+
+        if(employees.isEmpty()){
+            return "No employees registered yet.";
+        }
+
+        employees.sort(Comparator.comparingDouble(Employee::getSalary));
+
+        sb.append("Employees sorted by gross salary (ascending order):").append(ItemOptions.EOL);
+
+        for (Employee employee : employees) {
+            sb.append(employee).append(ItemOptions.EOL);
+        }
+
+        return sb.toString();
+    }
+
+    public boolean changeEmployeeName(String empID, String newName){
+        Employee desiredEmployee = getEmployee(empID);
+        boolean successful = false;
+
+        if(employees.contains(desiredEmployee)){
+            desiredEmployee.setName(newName);
+            successful = true;
+        }
+
+        return successful;
+    }
+
+    public boolean changeInternGPA(String empID, int newGPA){
+        Intern desiredEmployee = (Intern) getEmployee(empID);
+        boolean successful = false;
+
+        if(employees.contains(desiredEmployee)){
+            desiredEmployee.setGPA(newGPA);
+            successful = true;
+        }
+
+        return successful;
+    }
+
+    public boolean changeManagerDegree(String empID, String newDegree){
+        Manager desiredEmployee = (Manager) getEmployee(empID);
+        boolean successful = false;
+
+        if(employees.contains(desiredEmployee)){
+            desiredEmployee.degreeChange(newDegree);
+            successful = true;
+        }
+
+        return successful;
+    }
+
+    public boolean changeDirectorDept(String empID, String newDept){
+        Director desiredEmployee = (Director) getEmployee(empID);
+        boolean successful = false;
+
+        if(employees.contains(desiredEmployee)){
+            desiredEmployee.setDepartment(newDept);
+            successful = true;
+        }
+
+        return successful;
+    }
+
+    public boolean changeGrossSalary(String empID, double newSalary){
+        Employee desiredEmployee = getEmployee(empID);
+        boolean successful = false;
+
+        if(employees.contains(desiredEmployee)){
+            desiredEmployee.setSalary(newSalary);
+            if(getEmployee(empID) instanceof Manager && desiredEmployee.setSalary(newSalary)){
+                Manager desiredManager = (Manager) desiredEmployee;
+
+                if (desiredManager.degree.equals("BSc")) {
+                    desiredManager.setSalary(desiredManager.getSalary() * 1.1);
+                    //27500.275 -> .28
+                }
+                if (desiredManager.degree.equals("MSc")) {
+                    desiredManager.setSalary(desiredManager.getSalary() * 1.2);
+                }
+                if (desiredManager.degree.equals("PhD")) {
+                    desiredManager.setSalary(desiredManager.getSalary() * 1.35);
+                }
+            }
+            successful = true;
+        }
+
+        return successful;
+    }
+
+    //Salary is changing, degree is still the same
 }

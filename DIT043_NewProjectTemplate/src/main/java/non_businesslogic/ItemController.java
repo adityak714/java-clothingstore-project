@@ -345,7 +345,6 @@ public class ItemController {
     //3.6
     public String printAllReviews(){
         StringBuilder sb = new StringBuilder();
-        List <Item> abc = getItems();
         if (items.isEmpty()) {
             return "No items registered yet.";
         }
