@@ -254,8 +254,11 @@ public class Facade {
     }
 
     public String promoteToManager(String empID, String degree) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.promoteToManager(empID, degree)){
+            return (empID + " promoted successfully to Manager.");
+        }
 
+        return "Employee could not be promoted. "; //Exception
     }
 
     public String promoteToDirector(String empID, String degree, String department) throws Exception {

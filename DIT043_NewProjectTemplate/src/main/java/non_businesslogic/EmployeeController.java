@@ -267,4 +267,20 @@ private final List<Employee> employees;
 
         return empToDegree;
     }
+
+    public boolean promoteToManager(String empID, String degree){
+        Employee toBePromoted = getEmployee(empID);
+        boolean promoted = false;
+
+        for(Employee employee : employees){
+            if(employee.equals(toBePromoted)){
+                Employee manager = new Manager(empID, employee.name, employee.salary, degree);
+                int indexOfPromoted = employees.indexOf(toBePromoted);
+                employees.set(indexOfPromoted, manager);
+                promoted = true;
+            }
+        }
+
+        return promoted;
+    }
 }
