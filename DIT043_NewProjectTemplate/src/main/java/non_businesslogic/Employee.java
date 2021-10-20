@@ -17,7 +17,8 @@ public class Employee {
         }*/
         this.id = id;
         this.name = name;
-        this.salary = salary;
+        //this.salary = salary;
+        this.salary = truncateDecimalFormat(salary);
     }
 
     public String getName() {
