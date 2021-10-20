@@ -1,8 +1,6 @@
 package non_businesslogic;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class EmployeeController {
 
@@ -235,5 +233,38 @@ private final List<Employee> employees;
         return successful;
     }
 
-    //Salary is changing, degree is still the same
+    public Map<String, Integer> mapDegreeToEmployee(){
+        Map<String, Integer> empToDegree = new HashMap<>();
+
+        empToDegree.put("BSc", 0);
+        empToDegree.put("MSc", 0);
+        empToDegree.put("PhD", 0);
+
+        for(Employee employee : employees) {
+            if (employee instanceof Manager) {
+                Manager manager = (Manager) employee;
+                if(manager.getDegree().equals("BSc")){
+                    empToDegree.replace("BSc", empToDegree.get("BSc")+1);
+                }
+                if(manager.getDegree().equals("MSc")){
+                    empToDegree.replace("MSc", empToDegree.get("MSc")+1);
+                }
+                if(manager.getDegree().equals("PhD")){
+                    empToDegree.replace("PhD", empToDegree.get("PhD")+1);
+                }
+            }
+        }
+
+        if(empToDegree.get("BSc") == 0){
+            empToDegree.remove("BSc");
+        }
+        if(empToDegree.get("MSc") == 0){
+            empToDegree.remove("MSc");
+        }
+        if(empToDegree.get("PhD") == 0){
+            empToDegree.remove("PhD");
+        }
+
+        return empToDegree;
+    }
 }
