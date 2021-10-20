@@ -270,17 +270,128 @@ private final List<Employee> employees;
 
     public boolean promoteToManager(String empID, String degree){
         Employee toBePromoted = getEmployee(empID);
+        String toBePromotedName = toBePromoted.name;
+        double toBePromotedSalary = toBePromoted.salary;
+
         boolean promoted = false;
 
         for(Employee employee : employees){
             if(employee.equals(toBePromoted)){
-                Employee manager = new Manager(empID, employee.name, employee.salary, degree);
                 int indexOfPromoted = employees.indexOf(toBePromoted);
+
+                if(employee instanceof Director){
+                    toBePromotedSalary -= 5000;
+                    if (((Director) employee).degree.equals("BSc")) {
+                        toBePromotedSalary /= 1.1;
+                    }
+                    if (((Director) employee).degree.equals("MSc")) {
+                        toBePromotedSalary /= 1.2;
+                    }
+                    if (((Director) employee).degree.equals("PhD")) {
+                        toBePromotedSalary /= 1.35;
+                    }
+                    Manager director = new Manager(empID, toBePromotedName, toBePromotedSalary, degree);
+
+                    employees.set(indexOfPromoted, director);
+                    return true;
+                }
+
+                Employee manager = new Manager(empID, employee.name, employee.salary, degree);
                 employees.set(indexOfPromoted, manager);
                 promoted = true;
             }
         }
+        return promoted;
+    }
 
+    public boolean promoteToDirector(String empID, String degree, String department){
+        Employee toBePromoted = getEmployee(empID);
+        String toBePromotedName = toBePromoted.name;
+        double toBePromotedSalary = toBePromoted.salary;
+
+        boolean promoted = false;
+
+        for(Employee employee : employees){
+            if(employee.equals(toBePromoted)){
+                int indexOfPromoted = employees.indexOf(toBePromoted);
+
+                if(employee instanceof Manager){
+                    if (((Manager) employee).degree.equals("BSc")) {
+                        toBePromotedSalary /= 1.1;
+                    }
+                    if (((Manager) employee).degree.equals("MSc")) {
+                        toBePromotedSalary /= 1.2;
+                    }
+                    if (((Manager) employee).degree.equals("PhD")) {
+                        toBePromotedSalary /= 1.35;
+                    }
+
+                    Director manager = new Director(empID, toBePromotedName, toBePromotedSalary, degree, department);
+                    employees.set(indexOfPromoted, manager);
+                    return true;
+                }
+
+                Employee director = new Director(empID, employee.name, employee.salary, degree, department);
+
+                if(employee instanceof Intern){
+                    director.salary = ((Intern) employee).getOriginalSalary();
+                }
+                employees.set(indexOfPromoted, director);
+                promoted = true;
+            }
+        }
+        return promoted;
+    }
+
+    public boolean promoteToIntern(String empID, int gpa){
+        Employee toBePromoted = getEmployee(empID);
+        String toBePromotedName = toBePromoted.name;
+        double toBePromotedSalary = toBePromoted.salary;
+
+        boolean promoted = false;
+
+        for(Employee employee : employees){
+            if(employee.equals(toBePromoted)){
+                int index = employees.indexOf(toBePromoted);
+
+                if(employee instanceof Director){ // PhD 50000 -> 45000 / 1.35 = Starting gross salary that you had
+                    toBePromotedSalary -= 5000;
+                    if (((Manager) employee).degree.equals("BSc")) {
+                        toBePromotedSalary /= 1.1;
+                    }
+                    if (((Manager) employee).degree.equals("MSc")) {
+                        toBePromotedSalary /= 1.2;
+                    }
+                    if (((Manager) employee).degree.equals("PhD")) {
+                        toBePromotedSalary /= 1.35;
+                    }
+
+                    Intern newIntern = new Intern(empID, toBePromotedName, toBePromotedSalary, gpa);
+                    employees.set(index, newIntern);
+                    return true;
+                }
+
+                if(employee instanceof Manager){
+                    if (((Manager) employee).degree.equals("BSc")) {
+                        toBePromotedSalary /= 1.1;
+                    }
+                    if (((Manager) employee).degree.equals("MSc")) {
+                        toBePromotedSalary /= 1.2;
+                    }
+                    if (((Manager) employee).degree.equals("PhD")) {
+                        toBePromotedSalary /= 1.35;
+                    }
+
+                    Intern newIntern = new Intern(empID, toBePromotedName, toBePromotedSalary, gpa);
+                    employees.set(index, newIntern);
+                    return true;
+                }
+
+                Intern newIntern = new Intern(empID, toBePromotedName, toBePromotedSalary, gpa);
+                employees.set(index, newIntern);
+                promoted = true;
+            }
+        }
         return promoted;
     }
 }

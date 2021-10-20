@@ -4,19 +4,25 @@ public class Intern extends Employee {
 
     private int gpa;
     private final double internSalary;
+    private final double originalSalary;
 
     public Intern(String id, String name, double salary, int gpa){
         super(id, name, salary);
+        originalSalary = super.salary;
         this.gpa = gpa;
         final int internBonus = 1000;
         this.salary = salary;
         internSalary = salary;
 
-        if (gpa <= 5) {
+        if (gpa < 5) {
             this.salary = 0.0;
         } else if (gpa > 8) {
             this.salary = salary + internBonus;
         }
+    }
+
+    public double getOriginalSalary() {
+        return originalSalary;
     }
 
     public int getGPA(int gpa){ return gpa;}
@@ -24,7 +30,7 @@ public class Intern extends Employee {
     public void setGPA(int newGPA){
         this.gpa = newGPA;
 
-        if(newGPA <= 5){
+        if(newGPA < 4){
             this.salary = 0.0;
         } else if (newGPA > 8){
             this.salary = internSalary + 1000;

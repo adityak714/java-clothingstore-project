@@ -59,10 +59,9 @@ public class Director extends Manager {
             case "PhD":
                 this.salary = (1.35*((this.salary-5000)/1.2)+5000);
                 break;
-
             case "BSc":
-                this.salary = (((this.salary - 5000) / 1.2)*1.1);
-
+                this.salary = (((this.salary-5000)/1.2)*1.1);
+                break;
         }
     }
 

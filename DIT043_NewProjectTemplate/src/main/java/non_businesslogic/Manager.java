@@ -33,7 +33,6 @@ public class Manager extends Employee {
                 break;
             case "BSc":
                 this.salary = ((this.salary / 1.2)*1.1);
-
         }
     }
 

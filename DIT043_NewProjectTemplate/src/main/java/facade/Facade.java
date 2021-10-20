@@ -246,7 +246,7 @@ public class Facade {
             return "Employee " + empID + " was updated successfully";
         }
 
-        return "Employee could not be updated."; //Exception
+        return "Employee could not be updated."; //Exceptions
     }
 
     public Map<String, Integer> mapEachDegree() throws Exception {
@@ -258,14 +258,22 @@ public class Facade {
             return (empID + " promoted successfully to Manager.");
         }
 
-        return "Employee could not be promoted. "; //Exception
+        return "Employee could not be promoted. "; //Exceptions
     }
 
     public String promoteToDirector(String empID, String degree, String department) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.promoteToDirector(empID, degree, department)) {
+            return (empID + " promoted successfully to Director.");
+        }
+
+        return "Employee could not be promoted."; //Exceptions
     }
 
     public String promoteToIntern(String empID, int gpa) throws Exception {
-        return "";
+        if(EMPLOYEECONTROLLER.promoteToIntern(empID, gpa)) {
+            return (empID + " promoted successfully to Intern.");
+        }
+
+        return "Employee could not be promoted."; //Exceptions
     }
 }
