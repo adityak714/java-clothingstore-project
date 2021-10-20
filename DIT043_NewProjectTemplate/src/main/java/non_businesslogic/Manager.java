@@ -31,8 +31,23 @@ public class Manager extends Employee {
             case "PhD":
                 this.salary = (1.35*((this.salary)/1.2));
                 break;
+            case "BSc":
+                this.salary = ((this.salary / 1.2)*1.1);
+
         }
     }
+
+/*    public void promotionDegreeChange(String degree){
+
+        this.degree = degree;
+        if()
+        switch(degree){
+            case ""
+        }
+
+    }*/
+
+
 
     public String getDegree(){
         return degree;
