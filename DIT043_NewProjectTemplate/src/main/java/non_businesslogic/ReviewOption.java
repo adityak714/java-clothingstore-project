@@ -32,7 +32,7 @@ public class ReviewOption {
                     "9. Print item(s) with best mean review grade." + EOL +
                     "10. Print item(s) with worst mean review grade." + EOL
                     + EOL + "Type an option number: ");
-
+            try{
             switch (optionNumber) {
                 case 0:
                     startMenu.putOption();
@@ -70,6 +70,9 @@ public class ReviewOption {
                 default:
                     System.out.println("“Invalid menu option. Please type another option”");
                     break;
+            }
+            }catch(Exception exception){
+                System.out.println(exception.getMessage());
             }
         } while (optionNumber < 0 || optionNumber > 10);
     }

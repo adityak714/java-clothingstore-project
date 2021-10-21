@@ -28,46 +28,61 @@ public class TransactionMenu {
         facade = new Facade();
         startMenu = new StartMenu();
 
-        do {
-            optionsList();
-            response = Utilities.inputInt("Type an option number: ");
+        String id;
+        String name;
+        double price;
 
-            switch (response) {
-                case 0:
-                    startMenu.putOption();
-                    break;
-                case 1:
-                    facade.getTotalProfit();
-                    /*This block is having some issues, so ignore the red marking for the moment.*/
-                    break;
-                case 2:
-                    facade.getTotalUnitsSold();
-                    // Print total units sold from all item purchases
-                    break;
-                case 3:
-                    facade.printItemTransactions("");
-                    // Print the total number of item transactions made
-                    break;
-                case 4:
-                    facade.getTotalTransactions();
-                    // Print all transactions made.
-                    break;
-                case 5:
-                    // Print the total profit of a specific item.
-                    break;
-                case 6:
-                    // Print the number of units sold of a specific item
-                    break;
-                case 7:
-                    // Print all transactions of a specific item.
-                    break;
-                case 8:
-                    // Print item with the highest profit.
-                    break;
-                default:
-                    System.out.println("Invalid menu option. Please type another menu option." + ItemOptions.EOL);
-                    optionsList();
-                    break;
+        do {
+
+                optionsList();
+                response = Utilities.inputInt("Type an option number: ");
+            try {
+                switch (response) {
+                    case 0:
+                        startMenu.putOption();
+                        break;
+                    case 1:
+                        facade.getTotalProfit();
+                        /*This block is having some issues, so ignore the red marking for the moment.*/
+                        break;
+                    case 2:
+                        facade.getTotalUnitsSold();
+                        // Print total units sold from all item purchases
+                        break;
+                    case 3:
+                        facade.printItemTransactions("");
+                        // Print the total number of item transactions made
+                        break;
+                    case 4:
+                        facade.getTotalTransactions();
+                        // Print all transactions made.
+                        break;
+                    case 5:
+                        id = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
+                        facade.getProfit(id);
+                        // Print the total profit of a specific item.
+                        break;
+                    case 6:
+                        id = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
+                        facade.getUnitsSolds(id);
+                        // Print the number of units sold of a specific item
+                        break;
+                    case 7:
+                        facade.printAllTransactions();
+                        // Print all transactions of a specific item.
+                        // Missing the argument itemID to print all transactions of a specific item ^
+                        break;
+                    case 8:
+                        facade.printMostProfitableItems();
+                        // Print item with the highest profit.
+                        break;
+                    default:
+                        System.out.println("Invalid menu option. Please type another menu option." + ItemOptions.EOL);
+                        optionsList();
+                        break;
+                }
+            }catch(Exception exception){
+                System.out.println(exception.getMessage());
             }
         } while (response < 0 || response > 8);
     }

@@ -36,7 +36,7 @@ public class ItemOptions {
             int amount;
             String newName;
             double newPrice;
-
+        try {
             switch (input) {
                 case 0:
                     startMenu.putOption();
@@ -76,6 +76,9 @@ public class ItemOptions {
                     System.out.println("Invalid menu option. Please type another option" + EOL);
                     itemOptionsMenu();
             }
+        }catch(Exception exception){
+            System.out.println(exception.getMessage());
+        }
         } while (input < 0 || input > 7);
     }
 }

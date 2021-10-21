@@ -16,7 +16,7 @@ public class StartMenu {
                 "4. Open Employee options. ");
     }
 
-    public void putOption() {
+    public void putOption() throws Exception {
             int response;
 
             itemOptions = new ItemOptions();
