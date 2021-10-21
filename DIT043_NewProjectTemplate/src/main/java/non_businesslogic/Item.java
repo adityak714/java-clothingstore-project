@@ -19,8 +19,6 @@ public class Item {
         this.transactions = new ArrayList();
     }
 
-    //Item(ID, name, price, [Reviews], MeanGrade)
-
     //Get the id, name, price, but only name and price can be changed.
     public String getID(){ return id; }
 

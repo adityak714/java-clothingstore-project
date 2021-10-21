@@ -203,7 +203,6 @@ public class ItemController {
         boolean noReviews = getItem(itemID).getReviews().isEmpty();
         boolean hasItem = getItems().contains(getItem(itemID));
 
-        // First if block to be converted as do while loop in the menu.
         if(!hasItem){
             return "Item " + itemID + " was not registered yet.";
         }
@@ -251,23 +250,15 @@ public class ItemController {
         int truncatingResult;
         double truncatedResult;
 
-
         Item item = getItem(itemID);
         List<Review> reviews = item.getReviews();
-        //Item review = getReviews(itemID);
+
         if(reviews.isEmpty()){
             return sum;
         }
         for (Review grade : reviews) {
             sum += grade.getGrade();
         }
-
-       /* sum /= reviews.size();
-
-        double scale = (int) Math.pow(10, 1);
-        truncatedResult = (int) (sum * scale);
-
-        return truncatedResult / scale;*/
 
         reviewMean = sum / reviews.size();
         truncatingResult = (int)(reviewMean * 10);
@@ -287,7 +278,6 @@ public class ItemController {
                 if(!review.getComment().isBlank()){
                     comments.add(review.getComment());
                 }
-
             }
         }
 
@@ -354,8 +344,6 @@ public class ItemController {
         }
     }
 
-
-    //to be discussed with greg, copying items from previous list into this list
     public String printLeastReviewedItems() {
         StringBuilder sb = new StringBuilder();
 
@@ -374,13 +362,11 @@ public class ItemController {
             }
             return sb.toString();
         }
-        else return "Least reviews: 0 review(s) each."; //test oracle computed wrongly by Francisco
+        else return "Least reviews: 0 review(s) each.";
 
     }
 
-
     int numLeast;
-
 
     public List<Item> getLeastReviewedSet(){
         List<Item> least = new ArrayList<>();
@@ -606,11 +592,6 @@ public class ItemController {
         } return sb.toString();
     }
 
-
-    //getTotalTransactions = number of Transaction objects
-    //getTotalUnitsSold = total added up number of single items bought, from all IDs
-    //getTotalProfit
-
     public int getTotalTransactions(){
         int numTransactions = 0;
 
@@ -644,12 +625,9 @@ public class ItemController {
         sb.append(String.format("Total purchases made: %d transactions", getTotalTransactions())).append(ItemOptions.EOL);
         sb.append("------------------------------------").append(ItemOptions.EOL);
 
-        boolean transactions = false;
-
         for (Item item : getItems()) {
             // add later to the menu.
             if(item.getTransactionHistory().size() > 0){
-                transactions = true;
                 for (Transaction entry : item.getTransactionHistory()) {
                     sb.append(item.getID());
                     sb.append(entry).append(ItemOptions.EOL);
@@ -676,7 +654,6 @@ public class ItemController {
         profitMade = (double) truncatingProfit / 100;
         return profitMade;
     }
-    //Change comparators to for loops to retain the order
 
     public String mostProfitableItems(){
         StringBuilder sb = new StringBuilder();
@@ -693,8 +670,6 @@ public class ItemController {
             }
         }
 
-        //There is some item that is most profitable, having a price of 3998
-        //in the second for loop, it finds which item is it that has that most profitable price
         if(mostProfitable == 0){
             return "No items were bought yet.";
         }

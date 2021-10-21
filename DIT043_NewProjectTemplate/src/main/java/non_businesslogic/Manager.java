@@ -4,15 +4,11 @@ public class Manager extends Employee {
 
     protected String degree;
 
-    // MSc -> PhD
-    //BSc-MSc 50000-5000/1.1
-
     public Manager(String id, String name, double salary, String degree) {
         super(id, name, salary);
         this.degree = degree;
         if (degree.equals("BSc")) {
             this.salary = getSalary() * 1.1;
-            //27500.275 -> .28
         }
         if (degree.equals("MSc")) {
             this.salary = getSalary() * 1.2;
@@ -36,27 +32,9 @@ public class Manager extends Employee {
         }
     }
 
-/*    public void promotionDegreeChange(String degree){
-
-        this.degree = degree;
-        if()
-        switch(degree){
-            case ""
-        }
-
-    }*/
-
-
-
     public String getDegree(){
         return degree;
     }
-    // Create more branches with degrees; BSc, MSc & PhD (with 10%, 20% & 35% bonus corresponding to each).
-    // The bonus should only affect the salary set in the super class, not anywhere else.
-   /* public double truncateSalary(double value, int decimals){
-         double newValue = ((int) value * Math.pow(10, decimals)) / Math.pow(10, decimals);
-         return newValue;
-    }*/
 
     @Override
     public double getNetSalary() {

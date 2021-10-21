@@ -1,7 +1,5 @@
 package non_businesslogic;
 
-import facade.Facade;
-
 public class TransactionMenu {
 
     private Facade facade;
@@ -10,9 +8,6 @@ public class TransactionMenu {
     }
 
     private StartMenu startMenu;
-    public StartMenu getStartMenu() {
-        return startMenu;
-    }
 
     static void optionsList() {
         System.out.println(ItemOptions.EOL + "Transaction History options menu:" + ItemOptions.EOL +

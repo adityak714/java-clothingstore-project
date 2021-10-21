@@ -21,10 +21,6 @@ private final List<Employee> employees;
 
     // we have created new objects of all classes in case the user's id doesn't exist.
     Employee empty = new Employee("", "", 0.0);
-    Employee emptyManager = new Manager("", "", 0.0, "");
-    Employee emptyDirector = new Director("", "", 0.0, "", "");
-    Employee emptyIntern = new Intern("", "", 0.0, 0);
-
 
     public Employee getEmployee(String employeeID){
 
@@ -35,8 +31,6 @@ private final List<Employee> employees;
         }
         return empty;
     }
-
-
 
     // We create a new array of employees in EmployeeController constructor.
     public EmployeeController(){ this.employees = new ArrayList<>(); }

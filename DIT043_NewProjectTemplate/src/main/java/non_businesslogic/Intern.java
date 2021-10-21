@@ -25,8 +25,6 @@ public class Intern extends Employee {
         return originalSalary;
     }
 
-    public int getGPA(int gpa){ return gpa;}
-
     public void setGPA(int newGPA){
         this.gpa = newGPA;
 

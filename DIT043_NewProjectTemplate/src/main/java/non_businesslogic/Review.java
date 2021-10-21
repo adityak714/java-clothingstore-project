@@ -2,8 +2,6 @@ package non_businesslogic;
 
 public class Review {
     // ATTRIBUTES
-   /* private String itemID;-----> am not sure if we are supposed to add the ID or not
-    coz the facade and the test do have it. */
     private String reviewComment;
     private int reviewGrade;
 

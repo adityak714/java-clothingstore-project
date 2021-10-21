@@ -1,7 +1,5 @@
 package non_businesslogic;
 
-import facade.Facade;
-
 public class ItemOptions {
 
     public static final String EOL = System.lineSeparator();

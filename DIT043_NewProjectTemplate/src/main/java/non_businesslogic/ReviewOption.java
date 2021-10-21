@@ -1,7 +1,5 @@
 package non_businesslogic;
 
-import facade.Facade;
-
 public class ReviewOption {
 
     public static final String EOL = System.lineSeparator();
@@ -12,9 +10,6 @@ public class ReviewOption {
     }
 
     private StartMenu startMenu;
-    public StartMenu getStartMenu() {
-        return startMenu;
-    }
 
     public void reviewsMenu() {
 
