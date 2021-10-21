@@ -19,6 +19,7 @@ private final List<Employee> employees;
         return employees;
     }
 
+    // we have created new objects of all classes in case the user's id doesn't exist.
     Employee empty = new Employee("", "", 0.0);
     Employee emptyManager = new Manager("", "", 0.0, "");
     Employee emptyDirector = new Director("", "", 0.0, "", "");
@@ -26,6 +27,7 @@ private final List<Employee> employees;
 
 
     public Employee getEmployee(String employeeID){
+
         for(Employee employee : employees){
            if(employee.hasSameID(employeeID)){
                return employee;
@@ -34,34 +36,14 @@ private final List<Employee> employees;
         return empty;
     }
 
-    public Manager getManager(String employeeID){
-        if(getEmployee(employeeID) instanceof Manager){
-            return (Manager) getEmployee(employeeID);
-        }
-        return ((Manager) emptyManager);
-    }
 
-    public Director getDirector(String employeeID){
-        if(getEmployee(employeeID) instanceof Director){
-            return (Director) getEmployee(employeeID);
-        }
-        return ((Director) emptyDirector);
-    }
 
-    public Intern getIntern(String employeeID){
-        if(getEmployee(employeeID) instanceof Intern){
-            return (Intern) getEmployee(employeeID);
-        }
-        return ((Intern) emptyIntern);
-    }
-
-    protected double truncateSalary(double value, int decimal){
-        return ((int) value * Math.pow(10, decimal)) / Math.pow(10, decimal);
-    }
-
+    // We create a new array of employees in EmployeeController constructor.
     public EmployeeController(){ this.employees = new ArrayList<>(); }
 
+    // Creating a general employee reference and object.
     public boolean createEmployee(String employeeID, String name, double grossSalary) {
+
         if (employeeID.isEmpty() || name.isEmpty() || grossSalary <= 0 || employees.contains(getEmployee(employeeID))) {
             return false;
         } else {
@@ -71,6 +53,7 @@ private final List<Employee> employees;
         }
     }
 
+    // Creating a Director employee reference and object.
     public boolean createDirector(String employeeID, String name, double grossSalary, String degree, String department) {
         if(employeeID.isEmpty() || name.isEmpty() || grossSalary <= 0 || employees.contains(getEmployee(employeeID))){
             return false;
@@ -81,31 +64,40 @@ private final List<Employee> employees;
         }
     }
 
+    //  Creating a Manager employee reference and object.
     public boolean createManager(String employeeID, String name, String degree, double grossSalary){
         if (employeeID.isBlank() || name.isBlank() || grossSalary <= 0 || employees.contains(getEmployee(employeeID)) || degree.isBlank()){
             return false;
-        } else {
+        }
+        else {
+
             Employee employee = new Manager(employeeID, name, grossSalary, degree);
             employees.add(employee);
-            // need to create a collection to store all managers (and the same for other positions)
+
             return true;
         }
     }
 
+    //  Creating an Intern employee reference and object.
     public boolean createIntern(String employeeID, String name, double grossSalary, int gpa) {
         if (employeeID.isEmpty() || name.isEmpty() || gpa <= 0 || employees.contains(getEmployee(employeeID))) {
             return false;
-        } else {
+        }
+        else {
+
             Employee employee = new Intern(employeeID, name, grossSalary, gpa);
             employees.add(employee);
+
             return true;
         }
     }
+
 
     public String removeEmployee (String employeeID) throws Exception {
         Employee desiredEmployee = getEmployee(employeeID);
 
         if (!desiredEmployee.equals(empty)) {
+
             employees.remove(desiredEmployee);
             return ("Employee " + employeeID + " was successfully removed.");
         }
@@ -114,6 +106,7 @@ private final List<Employee> employees;
 
     public double totalNetSalary(){
         double totalNet = 0.0;
+
         for(Employee employee : employees){
             totalNet += employee.getNetSalary();
         }
@@ -125,8 +118,9 @@ private final List<Employee> employees;
 
         sb.append("All registered employees:").append(ItemOptions.EOL);
 
+
         for (Employee employee : employees) {
-            // add later to the menu.
+
                 sb.append(employee).append(ItemOptions.EOL);
         }
 
@@ -181,7 +175,7 @@ private final List<Employee> employees;
 
     public boolean changeManagerDegree(String empID, String newDegree){
         Manager desiredEmployee = (Manager) getEmployee(empID);
-        Director desiredDirector;
+
         boolean successful = false;
 
         if(employees.contains(desiredEmployee)){
@@ -218,7 +212,7 @@ private final List<Employee> employees;
 
                 if (desiredManager.degree.equals("BSc")) {
                     desiredManager.setSalary(desiredManager.getSalary() * 1.1);
-                    //27500.275 -> .28
+
                 }
                 if (desiredManager.degree.equals("MSc")) {
                     desiredManager.setSalary(desiredManager.getSalary() * 1.2);
@@ -366,7 +360,7 @@ private final List<Employee> employees;
             if(employee.equals(toBePromoted)){
                 int index = employees.indexOf(toBePromoted);
 
-                if(employee instanceof Director){ // PhD 50000 -> 45000 / 1.35 = Starting gross salary that you had
+                if(employee instanceof Director){
                     toBePromotedSalary -= 5000;
                     if (((Manager) employee).degree.equals("BSc")) {
                         toBePromotedSalary /= 1.1;
