@@ -157,17 +157,17 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
-        EMPLOYEECONTROLLER.createEmployee(employeeID, employeeName, grossSalary);
-
-        if(employeeID.isEmpty()){
+        if(employeeID.isBlank()){
             throw new Exception("ID cannot be blank.");
         }
-        if(employeeName.isEmpty()){
+        if(employeeName.isBlank()){
             throw new Exception("Name cannot be blank.");
         }
         if(grossSalary <= 0){
             throw new Exception("Salary must be greater than zero.");
         }
+
+        EMPLOYEECONTROLLER.createEmployee(employeeID, employeeName, grossSalary);
 
         return "Employee " + employeeID + " was registered successfully.";
         // need to create conditional line of code in case employee creation unsuccessful
@@ -182,13 +182,37 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
-        if(EMPLOYEECONTROLLER.createManager(employeeID, employeeName, degree, grossSalary)){
-            return "Employee " + employeeID + " was registered successfully.";
+        if(employeeID.isBlank()){
+            throw new Exception("ID cannot be blank.");
         }
-        return "";
+        if(employeeName.isBlank()){
+            throw new Exception("Name cannot be blank.");
+        }
+        if(grossSalary <= 0){
+            throw new Exception("Salary must be greater than zero.");
+        }
+        if(!degree.equals("BSc") && !degree.equals("MSc") && !degree.equals("PhD")){
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+        }
+
+        EMPLOYEECONTROLLER.createManager(employeeID, employeeName, degree, grossSalary);
+        return "Employee " + employeeID + " was registered successfully.";
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, int gpa) throws Exception {
+        if(employeeID.isBlank()){
+            throw new Exception("ID cannot be blank.");
+        }
+        if(employeeName.isBlank()){
+            throw new Exception("Name cannot be blank.");
+        }
+        if(grossSalary <= 0){
+            throw new Exception("Salary must be greater than zero.");
+        }
+        if(gpa < 0 || gpa > 10){
+            throw new Exception(gpa + " outside range. Must be between 0-10.");
+        }
+
         if(EMPLOYEECONTROLLER.createIntern(employeeID, employeeName, grossSalary, gpa)){
             return "Employee " + employeeID + " was registered successfully.";
         }
@@ -196,10 +220,30 @@ public class Facade {
     }
 
     public double getNetSalary(String employeeID) throws Exception {
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(employeeID))){
+            throw new Exception("Employee " + employeeID + " was not registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.getEmployee(employeeID).getNetSalary();
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
+        if(employeeID.isBlank()){
+            throw new Exception("ID cannot be blank.");
+        }
+        if(employeeName.isBlank()){
+            throw new Exception("Name cannot be blank.");
+        }
+        if(grossSalary <= 0){
+            throw new Exception("Salary must be greater than zero.");
+        }
+        if(!degree.equals("BSc") && !degree.equals("MSc") && !degree.equals("PhD") && degree.isBlank()){
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+        }
+        if(!dept.equals("Business") && !dept.equals("Human Resources") && !dept.equals("Technical") && dept.isBlank()){
+            throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
+        }
+
         if(EMPLOYEECONTROLLER.createDirector(employeeID, employeeName, grossSalary, degree, dept)){
             return "Employee " + employeeID + " was registered successfully.";
         }
@@ -207,66 +251,110 @@ public class Facade {
     }
 
     public String removeEmployee(String empID) throws Exception {
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.removeEmployee(empID);
     }
 
     public String printAllEmployees() throws Exception {
+        if(EMPLOYEECONTROLLER.getEmployees().isEmpty()){
+            throw new Exception("No employees registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.printAllEmployees();
     }
 
     public double getTotalNetSalary() throws Exception {
+        if(EMPLOYEECONTROLLER.getEmployees().isEmpty()){
+            throw new Exception("No employees registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.totalNetSalary();
     }
 
     public String printSortedEmployees() throws Exception {
+        if(EMPLOYEECONTROLLER.getEmployees().isEmpty()){
+            throw new Exception("No employees registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.sortEmployeesByGrossSalary();
     }
 
     public String updateEmployeeName(String empID, String newName) throws Exception {
-        if(EMPLOYEECONTROLLER.changeEmployeeName(empID, newName)){
-            return "Employee " + empID + " was updated successfully";
+        if(newName.isBlank()){
+            throw new Exception("Name cannot be blank.");
         }
 
-        return "Employee could not be updated."; //Exception
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
+
+        EMPLOYEECONTROLLER.changeEmployeeName(empID, newName);
+        return "Employee " + empID + " was updated successfully";
     }
 
     public String updateInternGPA(String empID, int newGPA) throws Exception {
-        if(EMPLOYEECONTROLLER.changeInternGPA(empID, newGPA)){
-            return "Employee " + empID + " was updated successfully";
+        if(newGPA < 0 || newGPA > 10){
+            throw new Exception(newGPA + " outside range. Must be between 0-10.");
+        }
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
-        return "Employee could not be updated."; //Exception
+        EMPLOYEECONTROLLER.changeInternGPA(empID, newGPA);
+        return "Employee " + empID + " was updated successfully";
     }
 
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
-        if(EMPLOYEECONTROLLER.changeManagerDegree(empID, newDegree)){
-            return "Employee " + empID + " was updated successfully";
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
+        if(!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")){
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
         }
 
-        return "Employee could not be updated."; //Exception
+        EMPLOYEECONTROLLER.changeManagerDegree(empID, newDegree);
+        return "Employee " + empID + " was updated successfully";
     }
 
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
-        if(EMPLOYEECONTROLLER.changeDirectorDept(empID, newDepartment)){
-            return "Employee " + empID + " was updated successfully";
+        if(!newDepartment.equals("Technical") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Business")){
+            throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         }
 
-        return "Employee could not be updated."; //Exception
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
+
+        EMPLOYEECONTROLLER.changeDirectorDept(empID, newDepartment);
+        return "Employee " + empID + " was updated successfully";
     }
 
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
-        if(EMPLOYEECONTROLLER.changeGrossSalary(empID, newSalary)){
-            return "Employee " + empID + " was updated successfully";
+        if(newSalary <= 0){
+            throw new Exception("Salary must be greater than zero.");
         }
-
-        return "Employee could not be updated."; //Exceptions
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
+        EMPLOYEECONTROLLER.changeGrossSalary(empID, newSalary);
+        return "Employee " + empID + " was updated successfully";
     }
 
     public Map<String, Integer> mapEachDegree() throws Exception {
+        if(EMPLOYEECONTROLLER.getEmployees().isEmpty()){
+            throw new Exception("No employees registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.mapDegreeToEmployee();
     }
 
     public String promoteToManager(String empID, String degree) throws Exception {
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        }
         if(EMPLOYEECONTROLLER.promoteToManager(empID, degree)){
             return (empID + " promoted successfully to Manager.");
         }
@@ -275,18 +363,24 @@ public class Facade {
     }
 
     public String promoteToDirector(String empID, String degree, String department) throws Exception {
-        if(EMPLOYEECONTROLLER.promoteToDirector(empID, degree, department)) {
-            return (empID + " promoted successfully to Director.");
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
-        return "Employee could not be promoted."; //Exceptions
+        EMPLOYEECONTROLLER.promoteToDirector(empID, degree, department);
+        return (empID + " promoted successfully to Director.");
     }
 
     public String promoteToIntern(String empID, int gpa) throws Exception {
-        if(EMPLOYEECONTROLLER.promoteToIntern(empID, gpa)) {
-            return (empID + " promoted successfully to Intern.");
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(empID))){
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
-        return "Employee could not be promoted."; //Exceptions
+        if(gpa < 0 || gpa > 10){
+            throw new Exception(gpa + " outside range. Must be between 0-10.");
+        }
+
+        EMPLOYEECONTROLLER.promoteToIntern(empID, gpa);
+        return (empID + " promoted successfully to Intern.");
     }
 }

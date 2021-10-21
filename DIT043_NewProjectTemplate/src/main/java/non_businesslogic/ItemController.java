@@ -411,6 +411,9 @@ public class ItemController {
         }
 
         if(getLeastReviewedSet() != null) {
+            if(getLeastReviewedSet().isEmpty()){
+                return "No items were reviewed yet.";
+            }
             sb.append(String.format("Least reviews: %d review(s) each." + ItemOptions.EOL, numLeast));
 
             for (Item item : getLeastReviewedSet()) {
@@ -522,7 +525,7 @@ public class ItemController {
         }
 
         if(maxRating == 0.0){
-            return "No items were reviewed yet";
+            return "No items were reviewed yet.";
         }
         else{
             sb.append("Items with best mean reviews:").append(ItemOptions.EOL);
