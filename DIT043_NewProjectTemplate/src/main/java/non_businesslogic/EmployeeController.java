@@ -335,6 +335,18 @@ private final List<Employee> employees;
 
                 if(employee instanceof Intern){
                     director.salary = ((Intern) employee).getOriginalSalary();
+                    final int directorBonus = 5000;
+
+                    if(degree == "BSc"){
+                        director.salary = director.salary * 1.1 + directorBonus;
+                    }
+                    if(degree == "MSc"){
+                        director.salary = director.salary * 1.2 + directorBonus;
+                    }
+                    if(degree == "PhD"){
+                        director.salary = director.salary * 1.35 + directorBonus;
+                    }
+
                 }
                 employees.set(indexOfPromoted, director);
                 promoted = true;
