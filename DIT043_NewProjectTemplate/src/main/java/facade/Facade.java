@@ -157,14 +157,27 @@ public class Facade {
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
-        if(EMPLOYEECONTROLLER.createEmployee(employeeID, employeeName, grossSalary)){
-            return "Employee " + employeeID + " was registered successfully.";
+        EMPLOYEECONTROLLER.createEmployee(employeeID, employeeName, grossSalary);
+
+        if(employeeID.isEmpty()){
+            throw new Exception("ID cannot be blank.");
         }
-        return "";
+        if(employeeName.isEmpty()){
+            throw new Exception("Name cannot be blank.");
+        }
+        if(grossSalary <= 0){
+            throw new Exception("Salary must be greater than zero.");
+        }
+
+        return "Employee " + employeeID + " was registered successfully.";
         // need to create conditional line of code in case employee creation unsuccessful
     }
 
     public String printEmployee(String employeeID) throws Exception {
+        if(!EMPLOYEECONTROLLER.getEmployees().contains(EMPLOYEECONTROLLER.getEmployee(employeeID))){
+            throw new Exception("Employee " + employeeID + " was not registered yet.");
+        }
+
         return EMPLOYEECONTROLLER.getEmployee(employeeID).toString();
     }
 
