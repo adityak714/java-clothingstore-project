@@ -84,26 +84,6 @@ public class Item {
         return profit;
     }
 
-/*    public double getItemProfit(){
-        double profit = 0.0;
-
-        for(Transaction entry : transactions){
-            profit += entry.getTotalPrice();
-        }
-
-        profit = (int) ((profit * 100) / 100);
-        return profit;
-    }*/
-
-/*    public int totalTransactions(){
-        int numTransactions = 0;
-
-        for(Transaction entry : transactions){
-            numTransactions += 1;
-        }
-        return numTransactions;
-    }*/
-
     @Override
     public String toString() {
         return String.format("%s: %s. %.2f SEK", id, name, getPrice());

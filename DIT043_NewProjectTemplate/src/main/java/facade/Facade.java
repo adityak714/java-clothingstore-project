@@ -192,7 +192,7 @@ public class Facade {
             throw new Exception("Salary must be greater than zero.");
         }
         if(!degree.equals("BSc") && !degree.equals("MSc") && !degree.equals("PhD")){
-            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+            throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
         }
 
         EMPLOYEECONTROLLER.createManager(employeeID, employeeName, degree, grossSalary);
@@ -312,7 +312,7 @@ public class Facade {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
         if(!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")){
-            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+            throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
         }
 
         EMPLOYEECONTROLLER.changeManagerDegree(empID, newDegree);

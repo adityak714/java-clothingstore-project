@@ -219,15 +219,12 @@ public class ItemController {
            return successfulRegistration;
        }
 
-        return "Item " + itemID + " not found.";
+        return "Item " + itemID + " was not registered yet.";
     }
 
 
     public String CreateReview(String itemID, String reviewComment, int reviewGrade){
-
-        // String itemID = Utilities.inputString("Enter the specific ID of the item: ");
         desiredItem = getItem(itemID);
-
 
         if (items.contains(desiredItem)){
             if(!(reviewGrade >= 1 && reviewGrade <= 5)) {
@@ -238,7 +235,7 @@ public class ItemController {
             return successfulRegistration;
         }
 
-        return "Item " + itemID + " not found.";
+        return "Item " + itemID + " was not registered yet.";
     }
 
 

@@ -8,16 +8,9 @@ public class Employee {
     protected double salary;
     protected double netSalary;
 
-    public Employee(String id, String name, double salary) /*throws Exception */{
-/*        if(id.isBlank() || name.isBlank()){
-            throw new Exception("Field cannot be empty.");
-        }
-        if(salary <= 0){
-            throw new Exception("Enter a non-zero value.");
-        }*/
+    public Employee(String id, String name, double salary){
         this.id = id;
         this.name = name;
-        //this.salary = salary;
         this.salary = truncateDecimalFormat(salary);
     }
 
@@ -35,8 +28,6 @@ public class Employee {
 
     public boolean setSalary(double salary) {
         this.salary = salary;
-        // Whenever the gross salary is changed, the new salary is adjusted again for the
-        // degree the employee has, regardless of if the degree was changed or not.
         return true;
     }
 

@@ -4,7 +4,7 @@ public class StartMenu {
 
     private ItemOptions itemOptions;
     private ReviewOption reviewOption;
-    private MenuThree menuThree;
+    private TransactionMenu menuThree;
     private EmployeeMenu employeeMenu;
 
     public static void optionsList() {
@@ -21,7 +21,7 @@ public class StartMenu {
 
             itemOptions = new ItemOptions();
             reviewOption = new ReviewOption();
-            menuThree = new MenuThree();
+            menuThree = new TransactionMenu();
             employeeMenu = new EmployeeMenu();
 
             do {
