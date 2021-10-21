@@ -1,12 +1,9 @@
 package non_businesslogic;
 
-import java.util.Objects;
-
 public class Employee {
     protected final String id;
     protected String name;
     protected double salary;
-    protected double netSalary;
 
     public Employee(String id, String name, double salary){
         this.id = id;
@@ -49,9 +46,5 @@ public class Employee {
         truncatedResult = (double) truncatingResult / 100;
 
         return truncatedResult;
-    }
-
-    protected double truncateSalary(double value, int decimal){
-        return (value * Math.pow(10, decimal)) / Math.pow(10, decimal);
     }
 }

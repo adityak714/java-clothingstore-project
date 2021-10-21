@@ -8,74 +8,32 @@ import java.util.List;
 
 public class ItemController {
 
-    //ATTRIBUTES
-
     private final List<Item> items;
-
     public List<Item> getItems() {
         return this.items;
     }
-
     public ItemController() {
         items = new ArrayList<>();
     }
 
 
     private final Item empty = new Item("","", 0.0);
-    //private final Review emptyReview = new Review("",0);
-
 
     private Item desiredItem;
 
     public Item getItem(String itemID) {
         for (Item item : items) {
-            if (/*Objects.equals(item.getID(), itemID)*/item.hasSameID(itemID)) {
-               // (items.contains(getItem(itemID)))
+            if (item.hasSameID(itemID)) {
                return item;
             }
         }
        return empty;
     }
 
-
-    public List<Integer> getGrades(String itemID){
-        Item desiredItem = getItem(itemID);
-        List<Integer> grades = new ArrayList<>();
-
-        for(Review review : desiredItem.getReviews()){
-            grades.add(review.getGrade());
-
-        }
-        return grades;
-
-    }
-
-/*
-    public boolean containsItem(String currentItem){
-        for(Item item : items){
-            if(item.hasSameID(currentItem)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Review getReview(String itemID) {
-        Item desiredItem = getItem(itemID);
-
-        for(Review review : desiredItem.getReviews()){
-            return review;
-        }
-        return emptyReview;
-    }
-*/
-
-
     //2.1 -- I want to create items in my system so that I can sell them in my system.
     public boolean CreatingItem(String id, String name, double price) {
 
-    /*2.2 -- I want to avoid the creation of items with invalid data
-             so that I only have reliable data in my system. */
+    // 2.2 Avoid the creation of items with invalid data
         if (id.isEmpty() || name.isEmpty() || price <= 0) {
             return false;
         }
@@ -133,7 +91,6 @@ public class ItemController {
         desiredItem = getItem(itemID);
 
         if (!(desiredItem.equals(empty))) {
-           // (!(getItem(itemID) == null))
             double unitPrice = desiredItem.getPrice();
 
             if (amount <= DISCOUNT_THRESHOLD) {
@@ -194,7 +151,6 @@ public class ItemController {
             sb.append(String.format("%s: %s. " + String.format("%.2f", i.getPrice()) + " SEK", i.getID(), i.getName()));
             sb.append(ItemOptions.EOL);
         }
-
         if (items.isEmpty()) {
             return "No items registered yet.";
         }
