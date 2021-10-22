@@ -5,12 +5,12 @@ public class Intern extends Employee {
     private int gpa;
     private final double internSalary;
     private final double originalSalary;
+    static final int internBonus = 1000;
 
     public Intern(String id, String name, double salary, int gpa){
         super(id, name, salary);
         originalSalary = super.salary;
         this.gpa = gpa;
-        final int internBonus = 1000;
         this.salary = salary;
         internSalary = salary;
 

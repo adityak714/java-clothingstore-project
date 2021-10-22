@@ -16,7 +16,7 @@ public class Item {
         this.name = name;
         this.price = price;
         this.reviewsList = new ArrayList<>();
-        this.transactions = new ArrayList();
+        this.transactions = new ArrayList<>();
     }
 
     //Get the id, name, price, but only name and price can be changed.

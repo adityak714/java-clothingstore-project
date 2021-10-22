@@ -28,9 +28,7 @@ public class TransactionMenu {
         facade = new Facade();
         startMenu = new StartMenu();
 
-        String id;
-        String name;
-        double price;
+        String itemID;
 
         do {
 
@@ -58,19 +56,19 @@ public class TransactionMenu {
                         // Print all transactions made.
                         break;
                     case 5:
-                        id = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
-                        facade.getProfit(id);
+                        itemID = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
+                        facade.getProfit(itemID);
                         // Print the total profit of a specific item.
                         break;
                     case 6:
-                        id = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
-                        facade.getUnitsSolds(id);
+                        itemID = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
+                        facade.getUnitsSolds(itemID);
                         // Print the number of units sold of a specific item
                         break;
                     case 7:
-                        facade.printAllTransactions();
+                        itemID = Utilities.inputString(ItemOptions.EOL + "Type the ID number for the item: ");
+                        facade.printItemTransactions(itemID);
                         // Print all transactions of a specific item.
-                        // Missing the argument itemID to print all transactions of a specific item ^
                         break;
                     case 8:
                         facade.printMostProfitableItems();

@@ -218,6 +218,7 @@ public class ItemController {
 
     //3.3
     public String printReviews(String itemID){
+
         StringBuilder sb = new StringBuilder();
         String name = getItem(itemID).getName();
         double price = getItem(itemID).getPrice();

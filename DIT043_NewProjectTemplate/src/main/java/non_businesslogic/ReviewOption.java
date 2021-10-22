@@ -17,6 +17,9 @@ public class ReviewOption {
         startMenu = new StartMenu();
 
         int optionNumber;
+        String itemID;
+        String comment;
+        int reviewNumber;
 
         do {
             optionNumber = Utilities.inputInt(EOL + "Review options menu: " + EOL +
@@ -38,34 +41,42 @@ public class ReviewOption {
                     startMenu.putOption();
                     break;
                 case 1:
-                    String itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    comment = Utilities.inputString("Enter a comment about the item: ");
+                    int grade = Utilities.inputInt("Enter a grade for the item: ");
+                    facade.reviewItem(itemID, comment, grade);
                     break;
                 case 2:
-                    System.out.println("PrintSpecificReviews()");
+                    itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    reviewNumber = Utilities.inputInt("Enter the number of the review: ");
+                    facade.getPrintedItemReview(itemID, reviewNumber);
                     break;
                 case 3:
-                    System.out.println("PrintAllReviews()");
+                    itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    facade.getPrintedReviews(itemID);
                     break;
                 case 4:
-                    System.out.println("PrintMeanGrade()");
+                    itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    facade.getItemMeanGrade(itemID);
                     break;
                 case 5:
-                    System.out.println("Printing all comments");
+                    itemID = Utilities.inputString("Enter the specific ID of the item: ");
+                    facade.getItemComments(itemID);
                     break;
                 case 6:
-                    System.out.println("Printing all registered reviews");
+                    facade.printAllReviews();
                     break;
                 case 7:
-                    System.out.println("Printing item(s) with most reviews");
+                    facade.getMostReviewedItems();
                     break;
                 case 8:
-                    System.out.println("Printing item(s) with least reviews");
+                    facade.getLeastReviewedItems();
                     break;
                 case 9:
-                    System.out.println("Printing item(s) with best mean review grade");
+                    facade.getBestReviewedItems();
                     break;
                 case 10:
-                    System.out.println("Printing item(s) with worst mean review grade");
+                    facade.getWorseReviewedItems();
                     break;
                 default:
                     System.out.println("“Invalid menu option. Please type another option”");

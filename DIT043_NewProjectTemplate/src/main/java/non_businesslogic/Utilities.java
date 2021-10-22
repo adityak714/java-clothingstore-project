@@ -17,8 +17,7 @@ public class Utilities {
     public static String inputString(String message){
         //takes user input as a string.
         System.out.print(message);
-        String valueString = scanner.nextLine();
-        return valueString;
+        return scanner.nextLine();
     }
 
     public static double inputDouble(String message){

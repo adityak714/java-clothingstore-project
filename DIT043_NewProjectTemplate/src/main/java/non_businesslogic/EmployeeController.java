@@ -4,7 +4,12 @@ import java.util.*;
 
 public class EmployeeController {
 
-private final List<Employee> employees;
+    private final List<Employee> employees;
+    static final double bachelorsBonus = Manager.BSCBONUS;
+    static final double mastersBonus = Manager.MSCBONUS;
+    static final double phdBonus = Manager.PHDBONUS;
+    static final int directorBonus = Manager.directorBonus;
+
 
     protected double truncateDecimalFormat(double input){
         int truncatingResult;
@@ -32,10 +37,10 @@ private final List<Employee> employees;
         return empty;
     }
 
-    // We create a new array of employees in EmployeeController constructor.
+
     public EmployeeController(){ this.employees = new ArrayList<>(); }
 
-    // Creating a general employee reference and object.
+
     public boolean createEmployee(String employeeID, String name, double grossSalary) {
 
         if (employeeID.isEmpty() || name.isEmpty() || grossSalary <= 0 || employees.contains(getEmployee(employeeID))) {
@@ -47,7 +52,7 @@ private final List<Employee> employees;
         }
     }
 
-    // Creating a Director employee reference and object.
+
     public boolean createDirector(String employeeID, String name, double grossSalary, String degree, String department) {
         if(employeeID.isEmpty() || name.isEmpty() || grossSalary <= 0 || employees.contains(getEmployee(employeeID))){
             return false;
@@ -58,7 +63,7 @@ private final List<Employee> employees;
         }
     }
 
-    //  Creating a Manager employee reference and object.
+
     public boolean createManager(String employeeID, String name, String degree, double grossSalary){
         if (employeeID.isBlank() || name.isBlank() || grossSalary <= 0 || employees.contains(getEmployee(employeeID)) || degree.isBlank()){
             return false;
@@ -72,7 +77,7 @@ private final List<Employee> employees;
         }
     }
 
-    //  Creating an Intern employee reference and object.
+
     public boolean createIntern(String employeeID, String name, double grossSalary, int gpa) {
         if (employeeID.isEmpty() || name.isEmpty() || gpa <= 0 || employees.contains(getEmployee(employeeID))) {
             return false;
@@ -112,14 +117,13 @@ private final List<Employee> employees;
 
         sb.append("All registered employees:").append(ItemOptions.EOL);
 
-
         for (Employee employee : employees) {
 
-                sb.append(employee).append(ItemOptions.EOL);
+            sb.append(employee).append(ItemOptions.EOL);
         }
 
         if(employees.isEmpty()){
-            return "No employees registered yet."; //Exception
+            return "No employees registered yet.";
         }
 
         return sb.toString();
@@ -199,20 +203,22 @@ private final List<Employee> employees;
         Employee desiredEmployee = getEmployee(empID);
         boolean successful = false;
 
+
         if(employees.contains(desiredEmployee)){
+
             desiredEmployee.setSalary(newSalary);
+
             if(getEmployee(empID) instanceof Manager && desiredEmployee.setSalary(newSalary)){
                 Manager desiredManager = (Manager) desiredEmployee;
 
                 if (desiredManager.degree.equals("BSc")) {
-                    desiredManager.setSalary(desiredManager.getSalary() * 1.1);
-
+                    desiredManager.setSalary(desiredManager.getSalary() * bachelorsBonus);
                 }
                 if (desiredManager.degree.equals("MSc")) {
-                    desiredManager.setSalary(desiredManager.getSalary() * 1.2);
+                    desiredManager.setSalary(desiredManager.getSalary() * mastersBonus);
                 }
                 if (desiredManager.degree.equals("PhD")) {
-                    desiredManager.setSalary(desiredManager.getSalary() * 1.35);
+                    desiredManager.setSalary(desiredManager.getSalary() * phdBonus);
                 }
             }
             successful = true;
@@ -268,15 +274,15 @@ private final List<Employee> employees;
                 int indexOfPromoted = employees.indexOf(toBePromoted);
 
                 if(employee instanceof Director){
-                    toBePromotedSalary -= 5000;
+                    toBePromotedSalary -= directorBonus;
                     if (((Director) employee).degree.equals("BSc")) {
-                        toBePromotedSalary /= 1.1;
+                        toBePromotedSalary /= bachelorsBonus;
                     }
                     if (((Director) employee).degree.equals("MSc")) {
-                        toBePromotedSalary /= 1.2;
+                        toBePromotedSalary /= mastersBonus;
                     }
                     if (((Director) employee).degree.equals("PhD")) {
-                        toBePromotedSalary /= 1.35;
+                        toBePromotedSalary /= phdBonus;
                     }
                     Manager director = new Manager(empID, toBePromotedName, toBePromotedSalary, degree);
 
@@ -305,13 +311,13 @@ private final List<Employee> employees;
 
                 if(employee instanceof Manager){
                     if (((Manager) employee).degree.equals("BSc")) {
-                        toBePromotedSalary /= 1.1;
+                        toBePromotedSalary /= bachelorsBonus;
                     }
                     if (((Manager) employee).degree.equals("MSc")) {
-                        toBePromotedSalary /= 1.2;
+                        toBePromotedSalary /= mastersBonus;
                     }
                     if (((Manager) employee).degree.equals("PhD")) {
-                        toBePromotedSalary /= 1.35;
+                        toBePromotedSalary /= phdBonus;
                     }
 
                     Director manager = new Director(empID, toBePromotedName, toBePromotedSalary, degree, department);
@@ -323,16 +329,15 @@ private final List<Employee> employees;
 
                 if(employee instanceof Intern){
                     director.salary = ((Intern) employee).getOriginalSalary();
-                    final int directorBonus = 5000;
 
                     if(degree == "BSc"){
-                        director.salary = director.salary * 1.1 + directorBonus;
+                        director.salary = director.salary * bachelorsBonus + directorBonus;
                     }
                     if(degree == "MSc"){
-                        director.salary = director.salary * 1.2 + directorBonus;
+                        director.salary = director.salary * mastersBonus + directorBonus;
                     }
                     if(degree == "PhD"){
-                        director.salary = director.salary * 1.35 + directorBonus;
+                        director.salary = director.salary * phdBonus + directorBonus;
                     }
 
                 }
@@ -355,15 +360,16 @@ private final List<Employee> employees;
                 int index = employees.indexOf(toBePromoted);
 
                 if(employee instanceof Director){
-                    toBePromotedSalary -= 5000;
+                    toBePromotedSalary -= directorBonus;
+
                     if (((Manager) employee).degree.equals("BSc")) {
-                        toBePromotedSalary /= 1.1;
+                        toBePromotedSalary /= bachelorsBonus;
                     }
                     if (((Manager) employee).degree.equals("MSc")) {
-                        toBePromotedSalary /= 1.2;
+                        toBePromotedSalary /= mastersBonus;
                     }
                     if (((Manager) employee).degree.equals("PhD")) {
-                        toBePromotedSalary /= 1.35;
+                        toBePromotedSalary /= phdBonus;
                     }
 
                     Intern newIntern = new Intern(empID, toBePromotedName, toBePromotedSalary, gpa);
@@ -372,14 +378,15 @@ private final List<Employee> employees;
                 }
 
                 if(employee instanceof Manager){
+
                     if (((Manager) employee).degree.equals("BSc")) {
-                        toBePromotedSalary /= 1.1;
+                        toBePromotedSalary /= bachelorsBonus;
                     }
                     if (((Manager) employee).degree.equals("MSc")) {
-                        toBePromotedSalary /= 1.2;
+                        toBePromotedSalary /= mastersBonus;
                     }
                     if (((Manager) employee).degree.equals("PhD")) {
-                        toBePromotedSalary /= 1.35;
+                        toBePromotedSalary /= phdBonus;
                     }
 
                     Intern newIntern = new Intern(empID, toBePromotedName, toBePromotedSalary, gpa);
