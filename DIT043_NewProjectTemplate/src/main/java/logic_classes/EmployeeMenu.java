@@ -1,4 +1,4 @@
-package non_businesslogic;
+package logic_classes;
 
 public class EmployeeMenu {
     private Facade facade;

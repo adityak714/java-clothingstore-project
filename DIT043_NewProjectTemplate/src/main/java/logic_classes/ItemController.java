@@ -1,4 +1,4 @@
-package non_businesslogic;
+package logic_classes;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

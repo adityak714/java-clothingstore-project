@@ -1,4 +1,4 @@
-package non_businesslogic;
+package logic_classes;
 
 public class Employee {
     protected final String id;

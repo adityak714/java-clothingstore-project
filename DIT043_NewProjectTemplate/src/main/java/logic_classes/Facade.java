@@ -1,7 +1,4 @@
-package non_businesslogic;
-
-import non_businesslogic.EmployeeController;
-import non_businesslogic.ItemController;
+package logic_classes;
 
 import java.util.List;
 import java.util.Map;
